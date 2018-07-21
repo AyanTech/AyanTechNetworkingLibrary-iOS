@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
   spec.homepage = "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS"
   spec.license = { type: 'MIT', file: 'LICENSE' }
   spec.authors = { "Sepehr Behroozi" => 'sep.behroozi@gmail.com' }
-  spec.social_media_url = "http://twitter.com/3pehrbehroozi"
+  spec.social_media_url = "https://twitter.com/3pehrbehroozi"
   spec.swift_version = "4.2"
   spec.platform = :ios, "9.1"
   spec.requires_arc = true
