@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		0502A2DA21030E2900F0332D /* AyanTechNetworkingLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 0502A2D821030E2900F0332D /* AyanTechNetworkingLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0502A2E2210310D300F0332D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0502A2E1210310D300F0332D /* Alamofire.framework */; };
+		0502A2E72103182F00F0332D /* ATError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E32103182F00F0332D /* ATError.swift */; };
+		0502A2E82103182F00F0332D /* ATRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E42103182F00F0332D /* ATRequest.swift */; };
+		0502A2E92103182F00F0332D /* ATResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E52103182F00F0332D /* ATResponse.swift */; };
+		0502A2EA2103182F00F0332D /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E62103182F00F0332D /* Server.swift */; };
+		0502A2EC2103186400F0332D /* ATLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2EB2103186400F0332D /* ATLog.swift */; };
+		0502A2EE2103188700F0332D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2ED2103188700F0332D /* Utils.swift */; };
+		0502A2F4210318A500F0332D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F0210318A400F0332D /* Double.swift */; };
+		0502A2F5210318A500F0332D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F1210318A400F0332D /* String.swift */; };
+		0502A2F6210318A500F0332D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F2210318A400F0332D /* Enums.swift */; };
+		0502A2F7210318A500F0332D /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F3210318A400F0332D /* Int.swift */; };
+		0502A2FA2103193400F0332D /* PersianStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F92103193400F0332D /* PersianStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +27,17 @@
 		0502A2D821030E2900F0332D /* AyanTechNetworkingLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AyanTechNetworkingLibrary.h; sourceTree = "<group>"; };
 		0502A2D921030E2900F0332D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0502A2E1210310D300F0332D /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0502A2E32103182F00F0332D /* ATError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATError.swift; sourceTree = "<group>"; };
+		0502A2E42103182F00F0332D /* ATRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATRequest.swift; sourceTree = "<group>"; };
+		0502A2E52103182F00F0332D /* ATResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATResponse.swift; sourceTree = "<group>"; };
+		0502A2E62103182F00F0332D /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		0502A2EB2103186400F0332D /* ATLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATLog.swift; sourceTree = "<group>"; };
+		0502A2ED2103188700F0332D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0502A2F0210318A400F0332D /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		0502A2F1210318A400F0332D /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		0502A2F2210318A400F0332D /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		0502A2F3210318A400F0332D /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		0502A2F92103193400F0332D /* PersianStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersianStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +72,8 @@
 		0502A2D721030E2900F0332D /* AyanTechNetworkingLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				0502A2F82103191800F0332D /* Model */,
+				0502A2EF2103189500F0332D /* Extension */,
 				0502A2D821030E2900F0332D /* AyanTechNetworkingLibrary.h */,
 				0502A2D921030E2900F0332D /* Info.plist */,
 			);
@@ -62,6 +86,31 @@
 				0502A2E1210310D300F0332D /* Alamofire.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0502A2EF2103189500F0332D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0502A2F0210318A400F0332D /* Double.swift */,
+				0502A2F2210318A400F0332D /* Enums.swift */,
+				0502A2F3210318A400F0332D /* Int.swift */,
+				0502A2F1210318A400F0332D /* String.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		0502A2F82103191800F0332D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0502A2F92103193400F0332D /* PersianStrings.swift */,
+				0502A2E32103182F00F0332D /* ATError.swift */,
+				0502A2E42103182F00F0332D /* ATRequest.swift */,
+				0502A2EB2103186400F0332D /* ATLog.swift */,
+				0502A2E52103182F00F0332D /* ATResponse.swift */,
+				0502A2ED2103188700F0332D /* Utils.swift */,
+				0502A2E62103182F00F0332D /* Server.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +156,7 @@
 				TargetAttributes = {
 					0502A2D421030E2900F0332D = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -142,6 +192,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0502A2E82103182F00F0332D /* ATRequest.swift in Sources */,
+				0502A2E72103182F00F0332D /* ATError.swift in Sources */,
+				0502A2EA2103182F00F0332D /* Server.swift in Sources */,
+				0502A2EC2103186400F0332D /* ATLog.swift in Sources */,
+				0502A2E92103182F00F0332D /* ATResponse.swift in Sources */,
+				0502A2EE2103188700F0332D /* Utils.swift in Sources */,
+				0502A2F5210318A500F0332D /* String.swift in Sources */,
+				0502A2F7210318A500F0332D /* Int.swift in Sources */,
+				0502A2FA2103193400F0332D /* PersianStrings.swift in Sources */,
+				0502A2F6210318A500F0332D /* Enums.swift in Sources */,
+				0502A2F4210318A500F0332D /* Double.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +332,7 @@
 		0502A2DE21030E2900F0332D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -288,6 +350,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ayantech.ir.AyanTechNetworkingLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -296,6 +359,7 @@
 		0502A2DF21030E2900F0332D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
