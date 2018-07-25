@@ -28,6 +28,9 @@ public class ATResponse {
         }
         return nil
     }
+    public var isSuccess: Bool {
+        return self.status?.isSuccess ?? false
+    }
     
     class func from(response: DataResponse<String>) -> ATResponse {
         let result = ATResponse()
@@ -49,6 +52,10 @@ public class ATResponse {
     public class Status {
         var errorCodeString: String?
         var description: String?
+
+        public var isSuccess: Bool {
+            return self.errorCodeString == kResponseSuccessCode
+        }
         
         class func from(json object: JSONObject?) -> Status? {
             guard let object = object else {
