@@ -17,6 +17,9 @@ public class ATResponse {
     public var parametersJsonObject: JSONObject? {
         return getJsonObject(responseJsonObject, ["Parameters"])
     }
+    public var parametersJsonArray: JSONArray? {
+        return getJsonArray(responseJsonObject, ["Parameters"])
+    }
     public var responseJsonObject: JSONObject? {
         if let data = self.responseString?.data(using: .utf8) {
             do {
