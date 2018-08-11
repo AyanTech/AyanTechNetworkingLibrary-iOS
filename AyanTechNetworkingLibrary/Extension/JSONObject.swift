@@ -12,7 +12,7 @@ extension Dictionary where Key == String {
     func toJsonData() -> Data {
         var result = Data()
         do {
-         result = try JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.sortedKeys)
+         result = try JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted)
         } catch {
             
         }
