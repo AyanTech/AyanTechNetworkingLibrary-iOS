@@ -7,45 +7,46 @@
 //
 
 import Foundation
-import Alamofire
 
 internal let kResponseSuccessCode = "G00000"
 
 class Server {
-    class func sendRequest(req: ATRequest, responseHandler: @escaping (DataResponse<String>) -> Void) {
+    
+    class func sendRequest(req: ATRequest, responseHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         ATLog("REQUEST", logData: "\(req.method.rawValue): \(req.url)")
-        let params = defaultJsonParametersProcess(params: req.body)
-        
-        //print params
-        do {
-            let jsonStringData = try JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted)
-            if let jsonString = String.init(data: jsonStringData, encoding: .utf8) {
-                ATLog("PARAMS", logData: "\(jsonString)")
-            }
-        } catch {
-            print(error.localizedDescription)
-            ATLog("PARAMS", logData: "\(params)")
+        if let jsonString = String.init(data: req.body ?? Data(), encoding: .utf8) {
+            ATLog("PARAMS", logData: "\(jsonString)")
         }
-        
         Utils.runOnMainThread {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
-        Alamofire.request(req.url, method: req.method, parameters: params, encoding: req.encoding, headers: req.headers).responseString { (response) in
+        
+        let r = NSMutableURLRequest(url: URL(string: req.url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        r.httpMethod = req.method.rawValue
+        req.headers.forEach { r.addValue($0.value, forHTTPHeaderField: $0.key) }
+        r.httpBody = req.body
+        req.task = URLSession.shared.dataTask(with: r as URLRequest) { (data, response, error) in
             Utils.runOnMainThread {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
-            if let responseString = String.init(data: response.data ?? Data(), encoding: .utf8) {
+            if let responseString = String.init(data: data ?? Data(), encoding: .utf8) {
                 ATLog("RESPONSE", logData: "\(responseString)")
             }
-            responseHandler(response)
+            
+            req.task = nil
+            responseHandler(data, response, error)
         }
+        req.task?.resume()
     }
-    
-    class func defaultJsonParametersProcess(params: Parameters?) -> Parameters {
+
+    class func defaultJsonParametersProcess(params: JSONObject?) -> JSONObject {
         var result = params ?? JSONObject()
         var identityParams = (result["Identity"] as? JSONObject) ?? JSONObject()
         identityParams["PackageName"] = "ios:" + (Bundle.main.bundleIdentifier ?? "")
         result["Identity"] = identityParams
         return result
     }
+    
+    // MARK: - URLSessionDelegate
+    
 }

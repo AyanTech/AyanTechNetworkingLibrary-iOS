@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import Alamofire
 
 public typealias BaseResponseHandler = (ATResponse) -> Void
 
 public class ATRequest {
+    var id = 0
     var url: String!
     var method: HTTPMethod!
     var headers = ATRequest.defaultHeaders
-    var body: Parameters?
-    var encoding: ParameterEncoding = JSONEncoding.default
+    var body: Data?
+    var task: URLSessionTask?
     
     var contentType: ContentType = .applicationJson {
         didSet {
@@ -49,49 +49,30 @@ public class ATRequest {
     }
 
     @discardableResult public func setJsonBody(body: JSONObject) -> Self {
-        self.body = body
+        self.body = body.toJsonData()
         self.contentType = .applicationJson
-        self.encoding = JSONEncoding.default
         return self
     }
 
     @discardableResult public func setStringBody(body: String) -> Self {
-        self.body = JSONObject()
-        self.encoding = body
+        self.body = body.data(using: .utf8)
         self.contentType = .textPlain
         return self
     }
 
     @discardableResult public func setHtmlBody(body: String) -> Self {
-        self.body = JSONObject()
-        self.encoding = body
+        self.body = body.data(using: .utf8)
         self.contentType = .textHtml
         return self
     }
     
     public func cancel() {
-        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionTasks, uploadTasks, downloadTasks) in
-            sessionTasks.forEach {
-                if $0.originalRequest?.url?.absoluteString == self.url {
-                    $0.cancel()
-                }
-            }
-            uploadTasks.forEach {
-                if $0.originalRequest?.url?.absoluteString == self.url {
-                    $0.cancel()
-                }
-            }
-            downloadTasks.forEach {
-                if $0.originalRequest?.url?.absoluteString == self.url {
-                    $0.cancel()
-                }
-            }
-        }
+        self.task?.cancel()
     }
     
     public func send(responseHandler: BaseResponseHandler?) {
-        Server.sendRequest(req: self) { (response) in
-            let atResponse = ATResponse.from(response: response)
+        Server.sendRequest(req: self) { (responseData, headers, error) in
+            let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
             if atResponse.error?.type == .cancelled {
                 return
             }

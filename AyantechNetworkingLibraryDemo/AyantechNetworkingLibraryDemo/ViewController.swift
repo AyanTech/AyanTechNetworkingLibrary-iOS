@@ -22,17 +22,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func sendButtonPressed() {
-        let params: JSONObject = [
-            "Parameters": [
-                "LicenseNumber": "12345678",
-                "TraceNumber": "123"
-            ]
-        ]
-        let request = ATRequest.request(url: "https://core.inquiry.ayantech.ir/WebServices/App.svc/GetDrivingNegativePointInquirySource", method: .post)
-//        request.setJsonBody(body: params)
-        request.send {
-            print($0.responseString ?? "null")
+        let request = ATRequest.request(url: "http://localhost:3000/api/game/start", method: .get)
+        request.send { res in
+            print(res.responseString ?? "null")
+        }
+        doWithDelay(2.0) {
+            request.cancel()
         }
     }
 }
 
+
+func doWithDelay(_ delay: Double, closure:@escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+}
