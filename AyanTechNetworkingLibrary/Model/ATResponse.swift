@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 public class ATResponse {
     public var responseString: String?
@@ -35,11 +34,11 @@ public class ATResponse {
         return self.status?.isSuccess ?? false
     }
     
-    class func from(response: DataResponse<String>) -> ATResponse {
+    class func from(responseData: Data?, responseHeaders: URLResponse?, responseError: Error?) -> ATResponse {
         let result = ATResponse()
-        result.responseCode = response.response?.statusCode ?? -1
-        if response.result.isSuccess {
-            if let data = response.data, let jsonString = String.init(data: data, encoding: .utf8) {
+        result.responseCode = (responseHeaders as? HTTPURLResponse)?.statusCode ?? -1
+        if result.responseCode / 10 == 20 {
+            if let data = responseData, let jsonString = String.init(data: data, encoding: .utf8) {
                 result.responseString = jsonString
             }
             result.status = Status.from(json: getJsonObject(result.responseJsonObject, ["Status"]))
@@ -47,7 +46,7 @@ public class ATResponse {
         } else {
             result.responseString = nil
             result.status = nil
-            result.error = ATError.from(error: response.result.error)
+            result.error = ATError.from(error: responseError)
         }
         return result
     }

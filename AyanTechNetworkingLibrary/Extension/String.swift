@@ -7,15 +7,8 @@
 //
 
 import Foundation
-import Alamofire
 
-extension String: ParameterEncoding {
-    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
-        var req = try urlRequest.asURLRequest()
-        req.httpBody = self.data(using: .utf8, allowLossyConversion: false)
-        return req
-    }
-    
+extension String {
     func toInt() -> Int? {
         return Int(self)
     }

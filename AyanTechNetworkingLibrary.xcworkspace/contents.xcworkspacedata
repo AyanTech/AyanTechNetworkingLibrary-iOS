@@ -5,9 +5,6 @@
       location = "group:AyantechNetworkingLibraryDemo/AyantechNetworkingLibraryDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Carthage/Checkouts/Alamofire/Alamofire.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "container:AyanTechNetworkingLibrary.xcodeproj">
    </FileRef>
 </Workspace>

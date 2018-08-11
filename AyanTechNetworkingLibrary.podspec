@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "AyanTechNetworkingLibrary"
-  spec.version = "1.0.2"
+  spec.version = "1.1.0"
   spec.summary = "Networking library for comunicate AyanTech web services"
   spec.homepage = "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS"
   spec.license = { type: 'MIT', file: 'LICENSE' }
@@ -11,6 +11,4 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.source = { git: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git", tag: "v#{spec.version}", submodules: true }
   spec.source_files = "AyanTechNetworkingLibrary/**/*.{h,swift}"
-
-  spec.dependency "Alamofire", "~> 4.7"
 end
