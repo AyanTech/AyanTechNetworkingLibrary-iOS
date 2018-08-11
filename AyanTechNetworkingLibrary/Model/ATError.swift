@@ -14,7 +14,7 @@ public class ATError: NSObject {
     public var type: ATErrorType?
     public var name: String!
     
-    class var generalError: ATError {
+    public class var generalError: ATError {
         let result = ATError()
         result.code = -1
         result.type = .general
@@ -27,6 +27,7 @@ public class ATError: NSObject {
             result.code = error.errorCode
             result.type = ATErrorType.from(error: error)
             result.name = error.code.name
+            result.persianDescription = result.type?.persianDescription ?? PersianStrings.generalNetworkError.rawValue
         }
         return result
     }
