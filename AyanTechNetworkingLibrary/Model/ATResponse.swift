@@ -52,8 +52,8 @@ public class ATResponse {
     }
     
     public class Status {
-        var errorCodeString: String?
-        var description: String?
+        public var errorCodeString: String?
+        public var description: String?
 
         public var isSuccess: Bool {
             return self.errorCodeString == kResponseSuccessCode
