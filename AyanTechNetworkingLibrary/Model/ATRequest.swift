@@ -18,13 +18,13 @@ public class ATRequest {
     var body: Data?
     var task: URLSessionTask?
     
-    var contentType: ContentType = .applicationJson {
+    public var contentType: ContentType = .applicationJson {
         didSet {
             self.headers["Content-Type"] = self.contentType.rawValue
         }
     }
 
-    enum ContentType: String {
+    public enum ContentType: String {
         case applicationJson = "application/json"
         case textPlain = "text/plain"
         case textHtml = "text/html"
@@ -40,6 +40,7 @@ public class ATRequest {
         let result = ATRequest()
         result.url = url
         result.method = method
+        result.headers = ATRequest.Configuration.defaultHeaders
         return result
     }
 
@@ -49,7 +50,7 @@ public class ATRequest {
     }
 
     @discardableResult public func setJsonBody(body: JSONObject) -> Self {
-        self.body = body.toJsonData()
+        self.body = Configuration.parametersCreator(body).toJsonData()
         self.contentType = .applicationJson
         return self
     }
@@ -78,5 +79,10 @@ public class ATRequest {
             }
             responseHandler?(atResponse)
         }
+    }
+    
+    public class Configuration {
+        public static var defaultHeaders: [String: String] = [:]
+        public static var parametersCreator: (JSONObject) -> JSONObject = { input in return input}
     }
 }
