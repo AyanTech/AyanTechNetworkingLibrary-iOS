@@ -28,13 +28,14 @@ class Server {
         req.task = URLSession.shared.dataTask(with: r as URLRequest) { (data, response, error) in
             Utils.runOnMainThread {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                
+                if let responseString = String.init(data: data ?? Data(), encoding: .utf8) {
+                    ATLog("RESPONSE", logData: "\(responseString)")
+                }
+                
+                req.task = nil
+                responseHandler(data, response, error)
             }
-            if let responseString = String.init(data: data ?? Data(), encoding: .utf8) {
-                ATLog("RESPONSE", logData: "\(responseString)")
-            }
-            
-            req.task = nil
-            responseHandler(data, response, error)
         }
         req.task?.resume()
     }
