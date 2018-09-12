@@ -17,7 +17,8 @@ public class ATRequest {
     var headers = ATRequest.defaultHeaders
     var body: Data?
     var task: URLSessionTask?
-    
+    private var mockFilePath: String?
+
     public var contentType: ContentType = .applicationJson {
         didSet {
             self.headers["Content-Type"] = self.contentType.rawValue
@@ -44,6 +45,11 @@ public class ATRequest {
         return result
     }
 
+    @discardableResult public func mockResponse(using filePath: String) -> Self {
+        self.mockFilePath = filePath
+        return self
+    }
+
     @discardableResult public func addHeader(key: String, value: String) -> Self {
         self.headers[key] = value
         return self
@@ -66,23 +72,32 @@ public class ATRequest {
         self.contentType = .textHtml
         return self
     }
-    
+
     public func cancel() {
         self.task?.cancel()
     }
-    
+
     public func send(responseHandler: BaseResponseHandler?) {
-        Server.sendRequest(req: self) { (responseData, headers, error) in
-            let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
-            if atResponse.error?.type == .cancelled {
-                return
+        if let mockFile = self.mockFilePath, !mockFile.isEmpty {
+            let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
+            doWithDelay(responseAndDelay.1) {
+                responseHandler?(responseAndDelay.0)
             }
-            responseHandler?(atResponse)
+        } else {
+            Server.sendRequest(req: self) { (responseData, headers, error) in
+                let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
+                if atResponse.error?.type == .cancelled {
+                    return
+                }
+                responseHandler?(atResponse)
+            }
         }
     }
-    
+
     public class Configuration {
         public static var defaultHeaders: [String: String] = [:]
-        public static var parametersCreator: (JSONObject) -> JSONObject = { input in return input}
+        public static var parametersCreator: (JSONObject) -> JSONObject = { input in
+            return input
+        }
     }
 }
