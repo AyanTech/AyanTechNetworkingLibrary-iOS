@@ -20,9 +20,12 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction private func sendButtonPressed() {
         let request = ATRequest.request(url: "http://localhost:3000/api/game/start", method: .get)
+        if let mockPath = Bundle.main.path(forResource: "mock", ofType: nil) {
+            request.mockResponse(using: mockPath)
+        }
         request.send { res in
             print(res.responseString ?? "null")
         }
@@ -33,7 +36,7 @@ class ViewController: UIViewController {
 }
 
 
-func doWithDelay(_ delay: Double, closure:@escaping () -> Void) {
+func doWithDelay(_ delay: Double, closure: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(
-        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }

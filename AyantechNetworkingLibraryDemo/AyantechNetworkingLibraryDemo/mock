@@ -1,0 +1,31 @@
+{
+  "headers": {
+    "Access-Control-Allow-Headers": "X-Requested-With,Content-Type, Accept",
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "private",
+    "Content-Length": "805",
+    "Content-Type": "application/json; charset=utf-8",
+    "Date": "Wed, 12 Sep 2018 06:05:07 GMT",
+    "Server": "Microsoft-IIS/8.5",
+    "X-AspNet-Version": "4.0.30319",
+    "X-Powered-By": "ASP.NET"
+  },
+  "body": {
+    "Parameters": [
+      {
+        "Detail": "{\"DataDetails\":[{\"ID\":168,\"Answer\":\"کاردان\",\"Question\":\"به کسی میگویند که با تجربه و کار آزموده باشد\"},{\"ID\":169,\"Answer\":\"مورچه\",\"Question\":\"حشره ای کوچک با بدنی سه قسمتی که به صورت اجتماعی کار می کند\"},{\"ID\":170,\"Answer\":\"رم\",\"Question\":\"از جا در رفتن\"},{\"ID\":171,\"Answer\":\"پاک\",\"Question\":\"چیزی که بی آلایش و بی غش می باشد\"}],\"LevelsDetail\":[{\"ID\":763,\"Matrix\":\"4\",\"Lock\":\"1\",\"Data\":\"ک,ر,م,ه,ا,ر,د,چ,پ,ن,ا,ر,ا,ک,م,و\",\"Wrong\":\"0\"}]}",
+        "ID": 100,
+        "Name": "100",
+        "ShowName": "100"
+      }
+    ],
+    "Status": {
+      "Code": "G00000",
+      "Description": "درخواست با موفقیت انجام شد."
+    }
+  },
+  "meta": {
+    "statusCode": 200,
+    "delay": 2.0
+  }
+}

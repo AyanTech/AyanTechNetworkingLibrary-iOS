@@ -27,6 +27,72 @@ request.send { response in
 }
 ```
 
+## Mocking response:
+Good news 😍! you can mock your response using a response file.
+
+Response file is a json file containing response body and headers. Currently only success responses can be mocked. here is the mock json file format and usage:
+#### Mock file format:
+```javascript
+{
+  "headers": {},
+  "body": {},
+  "meta": {
+    "statusCode": 200,
+    "delay": 2.0
+  }
+}
+```
+
+- `header` should be **Object** containing all header fields. *(optional)*
+- `meta` should be **Object** contains the status code and response delay in second. meta object is optional, default value for `statusCode` is 200 and for `delay` is 0
+- `body` can be **any** type i.e. Object, Array, String, Int, ... *(required)*
+
+example of mock json file:
+```javascript
+{
+  "headers": {
+    "Access-Control-Allow-Headers": "X-Requested-With,Content-Type, Accept",
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "private",
+    "Content-Length": "805",
+    "Content-Type": "application/json; charset=utf-8",
+    "Date": "Wed, 12 Sep 2018 06:05:07 GMT",
+    "Server": "Microsoft-IIS/8.5",
+    "X-AspNet-Version": "4.0.30319",
+    "X-Powered-By": "ASP.NET"
+  },
+  "body": {
+    "Parameters": [
+      {
+        "Detail": "درخواست انتقال وجه",
+        "ID": 100,
+        "Name": "100",
+        "ShowName": "100"
+      }
+    ],
+    "Status": {
+      "Code": "G00000",
+      "Description": "درخواست با موفقیت انجام شد."
+    }
+  },
+  "meta": {
+    "statusCode": 200,
+    "delay": 2.0
+  }
+}
+```
+
+#### Using mock file to mock response:
+Just use `mockResponse` method of `ATRequest` and pass the file path.\
+It looks like this:
+```swift
+ATRequest.request(url: "http://api.ayantech.ir/sampleApi", method: .get)
+    .mockResponse(using:  Bundle.main.path(forResource: "mockFile", ofType: nil)!)
+    .send { response in
+        print(response.responseString ?? "null")
+    }
+```
+
 ## Cheatsheet:
 
 ### ATRequest:
@@ -44,6 +110,7 @@ request.send { response in
 ### ATResponse:
 |       Property       |      Type      | Description                                                          |
 |:--------------------:|:--------------:|----------------------------------------------------------------------|
+| headers              | \[AnyHashable: Any\]| Response headers map                                          |
 | responseString       | String?        | Response raw body in String                                          |
 | status               | Status?        | Response Status object (if exist)                                    |
 | error                | ATError?       | Response error (if status code is something other than 20x)          |
