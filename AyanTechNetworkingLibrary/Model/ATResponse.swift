@@ -84,12 +84,19 @@ public class ATResponse {
             result.status = nil
             result.error = ATError.from(error: responseError)
         }
+        if result.status?.errorCodeString == Status.tokenExpiredCode {
+            NotificationCenter.default.post(name: NSNotification.Name.tokenExpiredReceived, object: nil)
+        }
         return result
     }
 
     public class Status {
         public var errorCodeString: String?
         public var description: String?
+        
+        public class var tokenExpiredCode: String {
+            return "G00002"
+        }
 
         public var isSuccess: Bool {
             return self.errorCodeString == kResponseSuccessCode
