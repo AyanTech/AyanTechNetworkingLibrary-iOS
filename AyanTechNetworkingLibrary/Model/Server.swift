@@ -12,8 +12,17 @@ internal let kResponseSuccessCode = "G00000"
 
 class Server {
     
+    fileprivate static var defaultUrlSession: URLSession = {
+        var config = URLSessionConfiguration.default
+        if ATRequest.Configuration.noProxy {
+            config.connectionProxyDictionary = [:]
+        }
+        let result = URLSession(configuration: config)
+        return result
+    }()
+    
     class func sendRequest(req: ATRequest, responseHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        ATLog("REQUEST", logData: "\(req.method.rawValue): \(req.url)")
+        ATLog("REQUEST", logData: "\(req.method.rawValue): \(req.url!)")
         if let jsonString = String.init(data: req.body ?? Data(), encoding: .utf8) {
             ATLog("PARAMS", logData: "\(jsonString)")
         }
@@ -21,11 +30,11 @@ class Server {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
         
-        let r = NSMutableURLRequest(url: URL(string: req.url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let r = NSMutableURLRequest(url: URL(string: req.url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
         r.httpMethod = req.method.rawValue
         req.headers.forEach { r.addValue($0.value, forHTTPHeaderField: $0.key) }
         r.httpBody = req.body
-        req.task = URLSession.shared.dataTask(with: r as URLRequest) { (data, response, error) in
+        req.task = Server.defaultUrlSession.dataTask(with: r as URLRequest) { (data, response, error) in
             Utils.runOnMainThread {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
@@ -39,15 +48,4 @@ class Server {
         }
         req.task?.resume()
     }
-
-    class func defaultJsonParametersProcess(params: JSONObject?) -> JSONObject {
-        var result = params ?? JSONObject()
-        var identityParams = (result["Identity"] as? JSONObject) ?? JSONObject()
-        identityParams["PackageName"] = "ios:" + (Bundle.main.bundleIdentifier ?? "")
-        result["Identity"] = identityParams
-        return result
-    }
-    
-    // MARK: - URLSessionDelegate
-    
 }
