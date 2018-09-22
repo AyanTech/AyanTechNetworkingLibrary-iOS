@@ -8,6 +8,6 @@
 
 import Foundation
 
-extension Notification.Name {
+public extension Notification.Name {
     static var tokenExpiredReceived = Notification.Name.init("tokenExpiredReceived")
 }

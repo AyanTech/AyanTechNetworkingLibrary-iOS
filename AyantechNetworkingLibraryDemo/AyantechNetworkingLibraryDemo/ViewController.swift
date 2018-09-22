@@ -22,10 +22,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func sendButtonPressed() {
-        let request = ATRequest.request(url: "http://localhost:3000/api/game/start", method: .get)
-        if let mockPath = Bundle.main.path(forResource: "mock", ofType: nil) {
-            request.mockResponse(using: mockPath)
-        }
+        let request = ATRequest.request(url: "http://tablegames.vas.ayantech.ir/webservices/App.svc/GetTournamentBaseInfo", method: .get)
+        
         request.send { res in
             print(res.responseString ?? "null")
         }

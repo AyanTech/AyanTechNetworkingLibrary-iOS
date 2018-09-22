@@ -95,6 +95,8 @@ public class ATRequest {
     }
 
     public class Configuration {
+        public static var noProxy = true
+        public static var timeout: TimeInterval = 30
         public static var defaultHeaders: [String: String] = [:]
         public static var parametersCreator: (JSONObject) -> JSONObject = { input in
             return input
