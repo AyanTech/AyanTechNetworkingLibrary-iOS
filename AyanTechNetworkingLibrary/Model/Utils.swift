@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ayantech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 class Utils {
@@ -18,6 +18,10 @@ class Utils {
                 code()
             }
         }
+    }
+    
+    class func sleep(seconds: TimeInterval) {
+        Thread.sleep(forTimeInterval: seconds)
     }
 }
 

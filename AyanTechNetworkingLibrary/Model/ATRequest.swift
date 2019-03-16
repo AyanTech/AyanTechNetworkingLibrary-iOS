@@ -93,6 +93,18 @@ public class ATRequest {
             }
         }
     }
+    
+    public func sendSync() -> ATResponse {
+        if let mockFile = self.mockFilePath, !mockFile.isEmpty {
+            let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
+            Utils.sleep(seconds: responseAndDelay.1)
+            return responseAndDelay.0
+        } else {
+            let responseCollection = Server.sendSyncRequest(req: self)
+            let atResponse = ATResponse.from(responseData: responseCollection.0, responseHeaders: responseCollection.1, responseError: responseCollection.2)
+            return atResponse
+        }
+    }
 
     public class Configuration {
         public static var noProxy = true

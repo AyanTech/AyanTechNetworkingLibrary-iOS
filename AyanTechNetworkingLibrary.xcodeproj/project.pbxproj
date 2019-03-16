@@ -19,6 +19,7 @@
 		0502A2F6210318A500F0332D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F2210318A400F0332D /* Enums.swift */; };
 		0502A2F7210318A500F0332D /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F3210318A400F0332D /* Int.swift */; };
 		0502A2FA2103193400F0332D /* PersianStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F92103193400F0332D /* PersianStrings.swift */; };
+		056527B0223CCDDA009CE9D6 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056527AF223CCDDA009CE9D6 /* URLSession.swift */; };
 		05AAC07221561F8A00D0A1D1 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC07121561F8A00D0A1D1 /* Notification.swift */; };
 		05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0CE211F19130025EC73 /* HTTPMethod.swift */; };
 		05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */; };
@@ -40,6 +41,7 @@
 		0502A2F2210318A400F0332D /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0502A2F3210318A400F0332D /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		0502A2F92103193400F0332D /* PersianStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersianStrings.swift; sourceTree = "<group>"; };
+		056527AF223CCDDA009CE9D6 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		05AAC07121561F8A00D0A1D1 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		05D0C0CE211F19130025EC73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONObject.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				0502A2F1210318A400F0332D /* String.swift */,
 				05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */,
 				05AAC07121561F8A00D0A1D1 /* Notification.swift */,
+				056527AF223CCDDA009CE9D6 /* URLSession.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			files = (
 				0502A2E82103182F00F0332D /* ATRequest.swift in Sources */,
 				0502A2E72103182F00F0332D /* ATError.swift in Sources */,
+				056527B0223CCDDA009CE9D6 /* URLSession.swift in Sources */,
 				0502A2EA2103182F00F0332D /* Server.swift in Sources */,
 				0502A2EC2103186400F0332D /* ATLog.swift in Sources */,
 				0502A2E92103182F00F0332D /* ATResponse.swift in Sources */,
