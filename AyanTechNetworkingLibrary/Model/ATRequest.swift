@@ -55,8 +55,8 @@ public class ATRequest {
         return self
     }
 
-    @discardableResult public func setJsonBody(body: JSONObject) -> Self {
-        self.body = Configuration.parametersCreator(body).toJsonData()
+    @discardableResult public func setJsonBody(body: JSONObject, ignoreParameterCreator ignore: Bool = false) -> Self {
+        self.body = (ignore ? body : Configuration.parametersCreator(body)).toJsonData()
         self.contentType = .applicationJson
         return self
     }

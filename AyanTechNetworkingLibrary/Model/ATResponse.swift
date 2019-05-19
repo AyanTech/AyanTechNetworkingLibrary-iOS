@@ -40,7 +40,7 @@ public class ATResponse {
         var delay: Double = 0
         if let fileInputStream = InputStream(fileAtPath: mockFilePath) {
             fileInputStream.open()
-            if let mockJson = try? JSONSerialization.jsonObject(with: fileInputStream, options: .allowFragments) as? JSONObject {
+            if let mockJson = (try? JSONSerialization.jsonObject(with: fileInputStream, options: .allowFragments) as? JSONObject) {
                 if let headers = getJsonObject(mockJson, ["headers"]) {
                     headers.forEach {
                         result.headers[$0] = $1
