@@ -13,7 +13,6 @@
 		0502A30F21031A0500F0332D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0502A30E21031A0500F0332D /* Assets.xcassets */; };
 		0502A31221031A0500F0332D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0502A31021031A0500F0332D /* LaunchScreen.storyboard */; };
 		0502A31B21031A3C00F0332D /* AyanTechNetworkingLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0502A31A21031A3C00F0332D /* AyanTechNetworkingLibrary.framework */; };
-		053265AE2148EB2C0085D7B4 /* AyanTechNetworkingLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0502A31A21031A3C00F0332D /* AyanTechNetworkingLibrary.framework */; };
 		053265AF2148EB2C0085D7B4 /* AyanTechNetworkingLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0502A31A21031A3C00F0332D /* AyanTechNetworkingLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B90944C9B8A7A2343A70B1A /* mock in Resources */ = {isa = PBXBuildFile; fileRef = 4B90920A3F47C7303086EB17 /* mock */; };
 /* End PBXBuildFile section */
@@ -50,7 +49,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0502A31B21031A3C00F0332D /* AyanTechNetworkingLibrary.framework in Frameworks */,
-				053265AE2148EB2C0085D7B4 /* AyanTechNetworkingLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +122,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Ayantech;
 				TargetAttributes = {
 					0502A30321031A0400F0332D = {
