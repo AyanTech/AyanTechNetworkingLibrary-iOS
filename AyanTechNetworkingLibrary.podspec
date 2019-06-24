@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.authors = { "Sepehr Behroozi" => 'sep.behroozi@gmail.com' }
   spec.social_media_url = "https://twitter.com/3pehrbehroozi"
   spec.swift_version = "5.0"
-  spec.platform = :ios, "11.0"
+  spec.platform = :ios, "10.0"
   spec.requires_arc = true
   spec.source = { git: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git", tag: "v#{spec.version}", submodules: true }
   spec.source_files = "AyanTechNetworkingLibrary/**/*.{h,swift}"
