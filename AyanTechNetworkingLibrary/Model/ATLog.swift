@@ -10,12 +10,25 @@ import Foundation
 
 var verbose = true
 
-func ATLog(_ key: String, logData: Any?) {
-    guard verbose else {
-        return
+public protocol ATNetworkLogging {
+    func logRequest(url: String, method: HTTPMethod, headers: [String: String], body: Data?)
+    func logResponse(requestUrl: String, requestMethod: HTTPMethod, requestHeaders: [String: String], requestBody: Data?, responseCode: Int, responseHeaders: [String: String]?, responseBody: Data?)
+}
+
+class DefaultATNetworkLogger: ATNetworkLogging {
+    func logRequest(url: String, method: HTTPMethod, headers: [String: String], body: Data?) {
+        var logContent = "AT-Log-REQUEST ===> \(method.rawValue) - \(url)"
+        if let jsonString = String.init(data: body ?? Data(), encoding: .utf8) {
+            logContent += "\n" + "Params: \(jsonString)"
+        }
+        print(logContent)
     }
-    if let logData = logData {
-        let logContent = "AT-Log-\(key) ===>  \(logData)"
+
+    func logResponse(requestUrl: String, requestMethod: HTTPMethod, requestHeaders: [String: String], requestBody: Data?, responseCode: Int, responseHeaders: [String: String]?, responseBody: Data?) {
+        var logContent = "AT-Log-RESPONSE ===> \(responseCode) - \(requestUrl)"
+        if let responseString = String.init(data: responseBody ?? Data(), encoding: .utf8) {
+            logContent += "\n" + responseString
+        }
         print(logContent)
     }
 }
