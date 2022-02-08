@@ -11,6 +11,7 @@ import Foundation
 internal let kResponseSuccessCode = "G00000"
 
 class Server {
+    static var logger: ATNetworkLogging = DefaultATNetworkLogger()
     
     fileprivate static var defaultUrlSession: URLSession = {
         var config = URLSessionConfiguration.default
@@ -22,10 +23,7 @@ class Server {
     }()
     
     class func sendSyncRequest(req: ATRequest) -> (Data?, URLResponse?, Error?) {
-        ATLog("REQUEST", logData: "\(req.method.rawValue): \(req.url!)")
-        if let jsonString = String.init(data: req.body ?? Data(), encoding: .utf8) {
-            ATLog("PARAMS", logData: "\(jsonString)")
-        }
+        logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
         Utils.runOnMainThread {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
@@ -40,18 +38,23 @@ class Server {
         Utils.runOnMainThread {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
-        if let responseString = String.init(data: result.0 ?? Data(), encoding: .utf8) {
-            ATLog("RESPONSE", logData: "\(responseString)")
-        }
-        
+
+        let responseCode = (result.1 as? HTTPURLResponse)?.statusCode ?? -1
+        let responseHeaders = ((result.1 as? HTTPURLResponse)?.allHeaderFields as? [String: String]) ?? [:]
+        logger.logResponse(
+          requestUrl: req.url,
+          requestMethod: req.method,
+          requestHeaders: req.headers,
+          requestBody: req.body,
+          responseCode: responseCode,
+          responseHeaders: responseHeaders,
+          responseBody: result.0
+        )
         return result
     }
     
     class func sendRequest(req: ATRequest, responseHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        ATLog("REQUEST", logData: "\(req.method.rawValue): \(req.url!)")
-        if let jsonString = String.init(data: req.body ?? Data(), encoding: .utf8) {
-            ATLog("PARAMS", logData: "\(jsonString)")
-        }
+        logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
         Utils.runOnMainThread {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
@@ -61,12 +64,20 @@ class Server {
         req.headers.forEach { r.addValue($0.value, forHTTPHeaderField: $0.key) }
         r.httpBody = req.body
         req.task = Server.defaultUrlSession.dataTask(with: r as URLRequest) { (data, response, error) in
+            let responseCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+            let responseHeaders = ((response as? HTTPURLResponse)?.allHeaderFields as? [String: String]) ?? [:]
+            logger.logResponse(
+              requestUrl: req.url,
+              requestMethod: req.method,
+              requestHeaders: req.headers,
+              requestBody: req.body,
+              responseCode: responseCode,
+              responseHeaders: responseHeaders,
+              responseBody: data
+            )
+
             Utils.runOnMainThread {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                
-                if let responseString = String.init(data: data ?? Data(), encoding: .utf8) {
-                    ATLog("RESPONSE", logData: "\(responseString)")
-                }
                 
                 req.task = nil
                 responseHandler(data, response, error)

@@ -9,6 +9,12 @@
 import Foundation
 
 public typealias BaseResponseHandler = (ATResponse) -> Void
+public typealias RefreshTokenCompletionHandler = () -> Void
+
+@objc public protocol ATRequestDelegate: AnyObject {
+    @objc optional func atRequestIsTokenValid() -> Bool
+    @objc optional func atRequestRefreshToken(completionHandler: @escaping RefreshTokenCompletionHandler)
+}
 
 public class ATRequest {
     var id = 0
@@ -17,7 +23,10 @@ public class ATRequest {
     var headers = ATRequest.defaultHeaders
     var body: Data?
     var task: URLSessionTask?
+    var tokenValidationRequired = false
+    private var isTokenValid = false
     private var mockFilePath: String?
+    public weak var delegate: ATRequestDelegate?
 
     public var contentType: ContentType = .applicationJson {
         didSet {
@@ -55,6 +64,11 @@ public class ATRequest {
         return self
     }
 
+    @discardableResult public func setNeedsTokenValidation(_ tokenValidationRequired: Bool) -> Self {
+        self.tokenValidationRequired = tokenValidationRequired
+        return self
+    }
+
     @discardableResult public func setJsonBody(body: JSONObject, ignoreParameterCreator ignore: Bool = false) -> Self {
         self.body = (ignore ? body : Configuration.parametersCreator(body)).toJsonData()
         self.contentType = .applicationJson
@@ -78,6 +92,15 @@ public class ATRequest {
     }
 
     public func send(responseHandler: BaseResponseHandler?) {
+        if tokenValidationRequired && !delegate!.atRequestIsTokenValid!() {
+            guard isTokenValid else {
+                delegate?.atRequestRefreshToken! { [weak self] in
+                    self?.isTokenValid = true
+                    self?.send(responseHandler: responseHandler)
+                }
+                return
+            }
+        }
         if let mockFile = self.mockFilePath, !mockFile.isEmpty {
             let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
             doWithDelay(responseAndDelay.1) {
@@ -112,6 +135,9 @@ public class ATRequest {
         public static var defaultHeaders: [String: String] = [:]
         public static var parametersCreator: (JSONObject) -> JSONObject = { input in
             return input
+        }
+        public static func setLogger(logger: ATNetworkLogging) {
+            Server.logger = logger
         }
     }
 }
