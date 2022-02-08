@@ -9,6 +9,6 @@ Pod::Spec.new do |spec|
   spec.swift_version = "5.0"
   spec.platform = :ios, "11.0"
   spec.requires_arc = true
-  spec.source = { git: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git", tag: "v#{spec.version}", submodules: true }
+  spec.source = { http: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS/archive/refs/heads/master.zip", git: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git", tag: "v#{spec.version}", submodules: true }
   spec.source_files = "AyanTechNetworkingLibrary/**/*.{h,swift}"
 end
