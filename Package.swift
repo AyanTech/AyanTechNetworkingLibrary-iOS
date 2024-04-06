@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "AyanTechNetworkingLibrary-iOS",
+    name: "AyanTechNetworkingLibrary",
     platforms: [
         .iOS(.v10),
     ],
