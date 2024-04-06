@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "AyanTechNetworkingLibrary-iOS",
+    name: "AyanTechNetworkingLibrary",
     platforms: [
         .iOS(.v10),
     ],
     products: [
         .library(
             name: "AyanTechNetworkingLibrary",
-            targets: ["AyanTechNetworkingLibrary"]
+            targets: ["AyanTechNetworkingLibrary-iOS"]
         ),
     ],
     targets: [
