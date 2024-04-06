@@ -10,7 +10,7 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "AyanTechNetworkingLibrary-iOS",
+            name: "AyanTechNetworkingLibrary",
             targets: ["AyanTechNetworkingLibrary-iOS"]
         ),
     ],
