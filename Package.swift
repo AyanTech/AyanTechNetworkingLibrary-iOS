@@ -11,12 +11,12 @@ let package = Package(
     products: [
         .library(
             name: "AyanTechNetworkingLibrary",
-            targets: ["ATNetworking"]
+            targets: ["AyanTechNetworkingLibrary"]
         ),
     ],
     targets: [
         .target(
-            name: "ATNetworking",
+            name: "AyanTechNetworkingLibrary",
             path: "AyanTechNetworkingLibrary"
         ),
     ]
