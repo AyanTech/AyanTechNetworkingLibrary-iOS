@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ayantech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 internal let kResponseSuccessCode = "G00000"
 
