@@ -17,11 +17,13 @@ public class ATResponse {
     public var parametersJsonObject: JSONObject? {
         return getJsonObject(responseJsonObject, ["Parameters"])
     }
+
     public var parametersJsonArray: JSONArray? {
         return getJsonArray(responseJsonObject, ["Parameters"])
     }
+
     public var responseJsonObject: JSONObject? {
-        if let data = self.responseString?.data(using: .utf8) {
+        if let data = responseString?.data(using: .utf8) {
             do {
                 let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 return result as? JSONObject
@@ -31,8 +33,9 @@ public class ATResponse {
         }
         return nil
     }
+
     public var isSuccess: Bool {
-        return self.status?.isSuccess ?? false
+        return status?.isSuccess ?? false
     }
 
     class func from(mockFilePath: String) -> (ATResponse, Double) {
@@ -48,9 +51,9 @@ public class ATResponse {
                 }
                 if let bodyString = getString(mockJson, ["body"]) {
                     result.responseString = bodyString
-                } else if let bodyJsonObject = getJsonObject(mockJson, ["body"]), let bodyString = String.init(data: (try? JSONSerialization.data(withJSONObject: bodyJsonObject, options: .prettyPrinted)) ?? Data(), encoding: .utf8) {
+                } else if let bodyJsonObject = getJsonObject(mockJson, ["body"]), let bodyString = String(data: (try? JSONSerialization.data(withJSONObject: bodyJsonObject, options: .prettyPrinted)) ?? Data(), encoding: .utf8) {
                     result.responseString = bodyString
-                } else if let bodyJsonArray = getJsonArray(mockJson, ["body"]), let bodyString = String.init(data: (try? JSONSerialization.data(withJSONObject: bodyJsonArray, options: .prettyPrinted)) ?? Data(), encoding: .utf8) {
+                } else if let bodyJsonArray = getJsonArray(mockJson, ["body"]), let bodyString = String(data: (try? JSONSerialization.data(withJSONObject: bodyJsonArray, options: .prettyPrinted)) ?? Data(), encoding: .utf8) {
                     result.responseString = bodyString
                 } else {
                     result.error = .generalError
@@ -74,7 +77,7 @@ public class ATResponse {
         result.responseCode = responseHeaders?.statusCode ?? -1
         result.headers = responseHeaders?.allHeaderFields ?? [:]
         if result.responseCode / 10 == 20 {
-            if let data = responseData, let jsonString = String.init(data: data, encoding: .utf8) {
+            if let data = responseData, let jsonString = String(data: data, encoding: .utf8) {
                 result.responseString = jsonString
             }
             result.status = Status.from(json: getJsonObject(result.responseJsonObject, ["Status"]))
@@ -93,13 +96,13 @@ public class ATResponse {
     public class Status {
         public var errorCodeString: String?
         public var description: String?
-        
+
         public class var tokenExpiredCode: String {
             return "G00002"
         }
 
         public var isSuccess: Bool {
-            return self.errorCodeString == kResponseSuccessCode
+            return errorCodeString == kResponseSuccessCode
         }
 
         class func from(json object: JSONObject?) -> Status? {

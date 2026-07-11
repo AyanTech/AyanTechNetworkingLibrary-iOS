@@ -92,9 +92,9 @@ public class ATRequest {
     }
 
     public func send(responseHandler: BaseResponseHandler?) {
-        if tokenValidationRequired && !delegate!.atRequestIsTokenValid!() {
-            guard isTokenValid else {
-                delegate?.atRequestRefreshToken! { [weak self] in
+        if self.tokenValidationRequired, !self.delegate!.atRequestIsTokenValid!() {
+            guard self.isTokenValid else {
+                self.delegate?.atRequestRefreshToken! { [weak self] in
                     self?.isTokenValid = true
                     self?.send(responseHandler: responseHandler)
                 }
@@ -107,7 +107,7 @@ public class ATRequest {
                 responseHandler?(responseAndDelay.0)
             }
         } else {
-            Server.sendRequest(req: self) { (responseData, headers, error) in
+            Server.sendRequest(req: self) { responseData, headers, error in
                 let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
                 if atResponse.error?.type == .cancelled {
                     return
@@ -116,7 +116,7 @@ public class ATRequest {
             }
         }
     }
-    
+
     public func sendSync() -> ATResponse {
         if let mockFile = self.mockFilePath, !mockFile.isEmpty {
             let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
@@ -134,8 +134,9 @@ public class ATRequest {
         public static var timeout: TimeInterval = 30
         public static var defaultHeaders: [String: String] = [:]
         public static var parametersCreator: (JSONObject) -> JSONObject = { input in
-            return input
+            input
         }
+
         public static func setLogger(logger: ATNetworkLogging) {
             Server.logger = logger
         }

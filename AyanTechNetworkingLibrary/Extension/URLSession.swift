@@ -13,17 +13,17 @@ extension URLSession {
         var data: Data?
         var error: Error?
         var response: URLResponse?
-        
-        let semaphor = DispatchSemaphore(value: 0)
+
+        let semaphore = DispatchSemaphore(value: 0)
         let dataTask = self.dataTask(with: urlRequest) {
             data = $0
             response = $1
             error = $2
-            semaphor.signal()
+            semaphore.signal()
         }
         dataTask.resume()
-        
-        _ = semaphor.wait(timeout: .distantFuture)
+
+        _ = semaphore.wait(timeout: .distantFuture)
         return (data, response, error)
     }
 }
