@@ -25,12 +25,12 @@ class Server {
     class func sendSyncRequest(req: ATRequest) -> (Data?, URLResponse?, Error?) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
-        let r = NSMutableURLRequest(url: URL(string: req.url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
-        r.httpMethod = req.method.rawValue
-        req.headers.forEach { r.addValue($0.value, forHTTPHeaderField: $0.key) }
-        r.httpBody = req.body
+        var request = URLRequest(url: URL(string: req.url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
+        request.httpMethod = req.method.rawValue
+        req.headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.key) }
+        request.httpBody = req.body
         
-        let result = URLSession.shared.synchronousDataTask(with: r as URLRequest)
+        let result = URLSession.shared.synchronousDataTask(with: request)
 
         let responseCode = (result.1 as? HTTPURLResponse)?.statusCode ?? -1
         let responseHeaders = ((result.1 as? HTTPURLResponse)?.allHeaderFields as? [String: String]) ?? [:]
@@ -49,11 +49,11 @@ class Server {
     class func sendRequest(req: ATRequest, responseHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
-        let r = NSMutableURLRequest(url: URL(string: req.url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
-        r.httpMethod = req.method.rawValue
-        req.headers.forEach { r.addValue($0.value, forHTTPHeaderField: $0.key) }
-        r.httpBody = req.body
-        req.task = Server.defaultUrlSession.dataTask(with: r as URLRequest) { data, response, error in
+        var request = URLRequest(url: URL(string: req.url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
+        request.httpMethod = req.method.rawValue
+        req.headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.key) }
+        request.httpBody = req.body
+        req.task = Server.defaultUrlSession.dataTask(with: request) { data, response, error in
             let responseCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             let responseHeaders = ((response as? HTTPURLResponse)?.allHeaderFields as? [String: String]) ?? [:]
             logger.logResponse(
