@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
   spec.license = { type: 'MIT', file: 'LICENSE' }
   spec.authors = { "Sepehr Behroozi" => 'sep.behroozi@gmail.com' }
   spec.social_media_url = "https://twitter.com/3pehrbehroozi"
-  spec.swift_version = "5.0"
+  spec.swift_version = "6.0"
   spec.platform = :ios, "11.0"
   spec.requires_arc = true
   spec.source = { :git => "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git", branch: "v#{spec.version}", submodules: true }

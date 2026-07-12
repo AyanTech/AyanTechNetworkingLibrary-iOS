@@ -11,9 +11,9 @@ import Foundation
 internal let kResponseSuccessCode = "G00000"
 
 class Server {
-    static var logger: ATNetworkLogging = DefaultATNetworkLogger()
+    nonisolated(unsafe) static var logger: ATNetworkLogging = DefaultATNetworkLogger()
     
-    fileprivate static var defaultUrlSession: URLSession = {
+    fileprivate static let defaultUrlSession: URLSession = {
         var config = URLSessionConfiguration.default
         if ATRequest.Configuration.noProxy {
             config.connectionProxyDictionary = [:]

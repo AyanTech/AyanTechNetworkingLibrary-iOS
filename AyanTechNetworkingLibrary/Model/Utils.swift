@@ -9,7 +9,7 @@
 import Foundation
 
 class Utils {
-    class func runOnMainThread(_ code: @escaping () -> Void) {
+    class func runOnMainThread(_ code: @escaping @Sendable () -> Void) {
         if Thread.isMainThread {
             code()
         } else {

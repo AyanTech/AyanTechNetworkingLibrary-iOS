@@ -130,10 +130,10 @@ public class ATRequest {
     }
 
     public class Configuration {
-        public static var noProxy = true
-        public static var timeout: TimeInterval = 30
-        public static var defaultHeaders: [String: String] = [:]
-        public static var parametersCreator: (JSONObject) -> JSONObject = { input in
+        nonisolated(unsafe) public static var noProxy = true
+        nonisolated(unsafe) public static var timeout: TimeInterval = 30
+        nonisolated(unsafe) public static var defaultHeaders: [String: String] = [:]
+        nonisolated(unsafe) public static var parametersCreator: (JSONObject) -> JSONObject = { input in
             input
         }
 
