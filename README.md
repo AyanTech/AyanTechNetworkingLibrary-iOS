@@ -1,13 +1,68 @@
 # iOS SDK for work with AyanTech web services
 
-use this SDK for communicate with AyanTech web services.
+Use this SDK to communicate with AyanTech web services.
 
-## Installation:
-In your project `PodFile` add this line:
+## Requirements
+
+- iOS 12.0+
+- Swift 6.0+
+- Xcode 16+
+
+## Installation
+
+### CocoaPods
+
+In your project `Podfile` add:
+
 ```
-pod 'AyanTechNetworkingLibrary`
+pod 'AyanTechNetworkingLibrary'
 ```
-And then run `pod install` command from terminal
+
+Then run `pod install`.
+
+### Swift Package Manager
+
+In Xcode, use **File → Add Package Dependencies** and enter:
+
+```
+https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git
+```
+
+## Configuration
+
+Configure the library once at app launch (for example in `AppDelegate`):
+
+```swift
+ATRequest.Configuration.noProxy = true
+ATRequest.Configuration.timeout = 30
+ATRequest.Configuration.defaultHeaders = [:]
+ATRequest.Configuration.setLoggerLevel(.default)
+```
+
+### Logger
+
+Control network request/response logging globally:
+
+```swift
+ATRequest.Configuration.setLoggerLevel(.default) // logs requests and responses (default)
+ATRequest.Configuration.setLoggerLevel(.none)    // disables network logging
+```
+
+For a custom logger:
+
+```swift
+ATRequest.Configuration.setLogger(myCustomLogger)
+```
+
+Recommended setup:
+
+```swift
+#if DEBUG
+ATRequest.Configuration.setLoggerLevel(.default)
+#else
+ATRequest.Configuration.setLoggerLevel(.none)
+#endif
+```
 
 ## Usage:
 ```swift
