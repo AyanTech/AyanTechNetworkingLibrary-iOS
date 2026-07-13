@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ATResponse {
+public final class ATResponse: @unchecked Sendable {
     public var responseString: String?
     public var error: ATError?
     public var status: Status?

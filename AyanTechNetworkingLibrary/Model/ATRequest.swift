@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias BaseResponseHandler = (ATResponse) -> Void
+public typealias BaseResponseHandler = @Sendable (ATResponse) -> Void
 public typealias RefreshTokenCompletionHandler = () -> Void
 
 @objc public protocol ATRequestDelegate: AnyObject {
@@ -16,7 +16,7 @@ public typealias RefreshTokenCompletionHandler = () -> Void
     @objc optional func atRequestRefreshToken(completionHandler: @escaping RefreshTokenCompletionHandler)
 }
 
-public class ATRequest {
+public final class ATRequest: @unchecked Sendable {
     var id = 0
     var url: String!
     var method: HTTPMethod!

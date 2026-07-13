@@ -46,7 +46,7 @@ class Server {
         return result
     }
     
-    class func sendRequest(req: ATRequest, responseHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    class func sendRequest(req: ATRequest, responseHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
         var request = URLRequest(url: URL(string: req.url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
