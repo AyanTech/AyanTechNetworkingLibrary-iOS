@@ -140,5 +140,14 @@ public final class ATRequest: @unchecked Sendable {
         public static func setLogger(logger: ATNetworkLogging) {
             Server.logger = logger
         }
+
+        public static func setLoggerLevel(_ level: ATLoggerLevel) {
+            switch level {
+            case .default:
+                Server.logger = DefaultATNetworkLogger()
+            case .none:
+                Server.logger = SilentATNetworkLogger()
+            }
+        }
     }
 }

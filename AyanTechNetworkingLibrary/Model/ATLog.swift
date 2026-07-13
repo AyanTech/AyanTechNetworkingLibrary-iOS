@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum ATLoggerLevel {
+    case none
+    case `default`
+}
+
 public protocol ATNetworkLogging {
     func logRequest(url: String, method: HTTPMethod, headers: [String: String], body: Data?)
     func logResponse(requestUrl: String, requestMethod: HTTPMethod, requestHeaders: [String: String], requestBody: Data?, responseCode: Int, responseHeaders: [String: String]?, responseBody: Data?)
@@ -43,4 +48,10 @@ class DefaultATNetworkLogger: ATNetworkLogging {
         }
         print(logContent)
     }
+}
+
+class SilentATNetworkLogger: ATNetworkLogging {
+    func logRequest(url: String, method: HTTPMethod, headers: [String: String], body: Data?) {}
+
+    func logResponse(requestUrl: String, requestMethod: HTTPMethod, requestHeaders: [String: String], requestBody: Data?, responseCode: Int, responseHeaders: [String: String]?, responseBody: Data?) {}
 }
