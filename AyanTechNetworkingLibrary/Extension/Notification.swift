@@ -9,5 +9,5 @@
 import Foundation
 
 public extension Notification.Name {
-    static var tokenExpiredReceived = Notification.Name.init("tokenExpiredReceived")
+    static let tokenExpiredReceived = Notification.Name.init("tokenExpiredReceived")
 }

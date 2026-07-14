@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias BaseResponseHandler = (ATResponse) -> Void
+public typealias BaseResponseHandler = @Sendable (ATResponse) -> Void
 public typealias RefreshTokenCompletionHandler = () -> Void
 
 @objc public protocol ATRequestDelegate: AnyObject {
@@ -16,7 +16,7 @@ public typealias RefreshTokenCompletionHandler = () -> Void
     @objc optional func atRequestRefreshToken(completionHandler: @escaping RefreshTokenCompletionHandler)
 }
 
-public class ATRequest {
+public final class ATRequest: @unchecked Sendable {
     var id = 0
     var url: String!
     var method: HTTPMethod!
@@ -92,9 +92,9 @@ public class ATRequest {
     }
 
     public func send(responseHandler: BaseResponseHandler?) {
-        if tokenValidationRequired && !delegate!.atRequestIsTokenValid!() {
-            guard isTokenValid else {
-                delegate?.atRequestRefreshToken! { [weak self] in
+        if self.tokenValidationRequired, !self.delegate!.atRequestIsTokenValid!() {
+            guard self.isTokenValid else {
+                self.delegate?.atRequestRefreshToken! { [weak self] in
                     self?.isTokenValid = true
                     self?.send(responseHandler: responseHandler)
                 }
@@ -107,7 +107,7 @@ public class ATRequest {
                 responseHandler?(responseAndDelay.0)
             }
         } else {
-            Server.sendRequest(req: self) { (responseData, headers, error) in
+            Server.sendRequest(req: self) { responseData, headers, error in
                 let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
                 if atResponse.error?.type == .cancelled {
                     return
@@ -116,7 +116,7 @@ public class ATRequest {
             }
         }
     }
-    
+
     public func sendSync() -> ATResponse {
         if let mockFile = self.mockFilePath, !mockFile.isEmpty {
             let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
@@ -130,14 +130,24 @@ public class ATRequest {
     }
 
     public class Configuration {
-        public static var noProxy = true
-        public static var timeout: TimeInterval = 30
-        public static var defaultHeaders: [String: String] = [:]
-        public static var parametersCreator: (JSONObject) -> JSONObject = { input in
-            return input
+        nonisolated(unsafe) public static var noProxy = true
+        nonisolated(unsafe) public static var timeout: TimeInterval = 30
+        nonisolated(unsafe) public static var defaultHeaders: [String: String] = [:]
+        nonisolated(unsafe) public static var parametersCreator: (JSONObject) -> JSONObject = { input in
+            input
         }
+
         public static func setLogger(logger: ATNetworkLogging) {
             Server.logger = logger
+        }
+
+        public static func setLoggerLevel(_ level: ATLoggerLevel) {
+            switch level {
+            case .default:
+                Server.logger = DefaultATNetworkLogger()
+            case .none:
+                Server.logger = SilentATNetworkLogger()
+            }
         }
     }
 }

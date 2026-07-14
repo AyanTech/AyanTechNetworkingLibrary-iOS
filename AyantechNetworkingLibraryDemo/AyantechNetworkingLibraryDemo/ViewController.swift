@@ -6,14 +6,14 @@
 //  Copyright © 2018 Ayantech. All rights reserved.
 //
 
-import UIKit
 import AyanTechNetworkingLibrary
+import UIKit
 
 class ViewController: UIViewController {
+    private let apiURL = "YOUR_URL"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,8 +22,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func sendButtonPressed() {
-        let request = ATRequest.request(url: "http://tablegames.vas.ayantech.ir/webservices/App.svc/GetTournamentBaseInfo", method: .get)
-        
+        let request = ATRequest.request(url: apiURL, method: .get)
+
         request.send { res in
             print(res.responseString ?? "null")
         }
@@ -33,8 +33,8 @@ class ViewController: UIViewController {
     }
 }
 
-
-func doWithDelay(_ delay: Double, closure: @escaping () -> Void) {
+func doWithDelay(_ delay: Double, closure: @Sendable @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(
-            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure
+    )
 }

@@ -10,20 +10,23 @@ import Foundation
 
 extension URLSession {
     func synchronousDataTask(with urlRequest: URLRequest) -> (Data?, URLResponse?, Error?) {
-        var data: Data?
-        var error: Error?
-        var response: URLResponse?
-        
-        let semaphor = DispatchSemaphore(value: 0)
+        let semaphore = DispatchSemaphore(value: 0)
+        final class SyncDataTaskResult: @unchecked Sendable {
+            var data: Data?
+            var response: URLResponse?
+            var error: Error?
+        }
+        let result = SyncDataTaskResult()
+
         let dataTask = self.dataTask(with: urlRequest) {
-            data = $0
-            response = $1
-            error = $2
-            semaphor.signal()
+            result.data = $0
+            result.response = $1
+            result.error = $2
+            semaphore.signal()
         }
         dataTask.resume()
-        
-        _ = semaphor.wait(timeout: .distantFuture)
-        return (data, response, error)
+
+        _ = semaphore.wait(timeout: .distantFuture)
+        return (result.data, result.response, result.error)
     }
 }

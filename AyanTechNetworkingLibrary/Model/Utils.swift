@@ -6,11 +6,10 @@
 //  Copyright © 2018 Ayantech. All rights reserved.
 //
 
-import UIKit
-
+import Foundation
 
 class Utils {
-    class func runOnMainThread(_ code: @escaping () -> Void) {
+    class func runOnMainThread(_ code: @escaping @Sendable () -> Void) {
         if Thread.isMainThread {
             code()
         } else {
@@ -19,30 +18,29 @@ class Utils {
             }
         }
     }
-    
+
     class func sleep(seconds: TimeInterval) {
         Thread.sleep(forTimeInterval: seconds)
     }
 }
 
-func doWithDelay(_ delay: Double, closure:@escaping () -> Void) {
+func doWithDelay(_ delay: Double, closure: @Sendable @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(
-        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure
+    )
 }
 
 public typealias JSONObject = [String: Any]
 public typealias JSONArray = [Any]
-let onePx = 1 / UIScreen.main.scale
 
 // ===========================================
 //   start of Helper functions of parsing json
 // ===========================================
 
 func getValue<T>(input: Any?, subscripts: [Any], endType: T) -> T? {
-    
     var extractingValue = input
-    
-    subscripts.forEach { (key) in
+
+    for key in subscripts {
         if let intKey = key as? Int {
             extractingValue = (extractingValue as? [Any])?[intKey]
         }
@@ -51,7 +49,7 @@ func getValue<T>(input: Any?, subscripts: [Any], endType: T) -> T? {
         }
     }
     switch endType {
-    case is Int :
+    case is Int:
         let result = extractingValue as? Int ?? (extractingValue as? String)?.toInt()
         return result as? T
     case is Double:
