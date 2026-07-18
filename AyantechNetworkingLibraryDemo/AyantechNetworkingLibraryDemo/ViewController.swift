@@ -30,6 +30,16 @@ class ViewController: UIViewController {
         doWithDelay(2.0) {
             request.cancel()
         }
+        
+        if #available(iOS 13.0, *) {
+            Task {
+                let request = ATRequest.request(url: apiURL, method: .post)
+                let response = await request.send()
+                print("Async/await response:", response.responseString ?? "null")
+            }
+        } else {
+            print("Async/await requires iOS 13+")
+        }
     }
 }
 

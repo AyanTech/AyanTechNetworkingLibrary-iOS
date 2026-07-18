@@ -23,6 +23,10 @@
 		05AAC07221561F8A00D0A1D1 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC07121561F8A00D0A1D1 /* Notification.swift */; };
 		05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0CE211F19130025EC73 /* HTTPMethod.swift */; };
 		05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */; };
+		C3008E8E30064B9000F640CC /* ATRequest+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E8D30064B9000F640CC /* ATRequest+Async.swift */; };
+		C3008E9030064B9000F640CC /* Server+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E8F30064B9000F640CC /* Server+Async.swift */; };
+		C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E90300656A000F640CC /* URLRequestBuilder.swift */; };
+		C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E92300656A000F640CC /* URLSessionBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		05AAC07121561F8A00D0A1D1 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		05D0C0CE211F19130025EC73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONObject.swift; sourceTree = "<group>"; };
+		C3008E8D30064B9000F640CC /* ATRequest+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+Async.swift"; sourceTree = "<group>"; };
+		C3008E8F30064B9000F640CC /* Server+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Async.swift"; sourceTree = "<group>"; };
+		C3008E90300656A000F640CC /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
+		C3008E92300656A000F640CC /* URLSessionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +88,7 @@
 			children = (
 				0502A2F82103191800F0332D /* Model */,
 				0502A2EF2103189500F0332D /* Extension */,
+				C3008E8A300645A900F640CC /* V2 */,
 				0502A2D821030E2900F0332D /* AyanTechNetworkingLibrary.h */,
 				0502A2D921030E2900F0332D /* Info.plist */,
 			);
@@ -121,6 +130,33 @@
 				05D0C0CE211F19130025EC73 /* HTTPMethod.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C3008E8A300645A900F640CC /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+				C3008E94300656A000F640CC /* Helpers */,
+				C3008E8E3006534000F640CC /* Model */,
+			);
+			path = V2;
+			sourceTree = "<group>";
+		};
+		C3008E8E3006534000F640CC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C3008E8D30064B9000F640CC /* ATRequest+Async.swift */,
+				C3008E8F30064B9000F640CC /* Server+Async.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C3008E94300656A000F640CC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C3008E90300656A000F640CC /* URLRequestBuilder.swift */,
+				C3008E92300656A000F640CC /* URLSessionBuilder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +249,10 @@
 				05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */,
 				0502A2F7210318A500F0332D /* Int.swift in Sources */,
 				05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */,
+				C3008E8E30064B9000F640CC /* ATRequest+Async.swift in Sources */,
+				C3008E9030064B9000F640CC /* Server+Async.swift in Sources */,
+				C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */,
+				C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */,
 				05AAC07221561F8A00D0A1D1 /* Notification.swift in Sources */,
 				0502A2FA2103193400F0332D /* PersianStrings.swift in Sources */,
 				0502A2F6210318A500F0332D /* Enums.swift in Sources */,

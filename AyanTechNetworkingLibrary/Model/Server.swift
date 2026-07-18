@@ -13,22 +13,14 @@ internal let kResponseSuccessCode = "G00000"
 class Server {
     nonisolated(unsafe) static var logger: ATNetworkLogging = DefaultATNetworkLogger()
     
-    fileprivate static let defaultUrlSession: URLSession = {
-        var config = URLSessionConfiguration.default
-        if ATRequest.Configuration.noProxy {
-            config.connectionProxyDictionary = [:]
-        }
-        let result = URLSession(configuration: config)
-        return result
+    static let defaultUrlSession: URLSession = {
+        URLSessionBuilder.makeDefaultSession()
     }()
     
     class func sendSyncRequest(req: ATRequest) -> (Data?, URLResponse?, Error?) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
-        var request = URLRequest(url: URL(string: req.url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
-        request.httpMethod = req.method.rawValue
-        req.headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.key) }
-        request.httpBody = req.body
+        let request = URLRequestBuilder.make(from: req)
         
         let result = URLSession.shared.synchronousDataTask(with: request)
 
@@ -49,10 +41,7 @@ class Server {
     class func sendRequest(req: ATRequest, responseHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
-        var request = URLRequest(url: URL(string: req.url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: ATRequest.Configuration.timeout)
-        request.httpMethod = req.method.rawValue
-        req.headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.key) }
-        request.httpBody = req.body
+        let request = URLRequestBuilder.make(from: req)
         req.task = Server.defaultUrlSession.dataTask(with: request) { data, response, error in
             let responseCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             let responseHeaders = ((response as? HTTPURLResponse)?.allHeaderFields as? [String: String]) ?? [:]
