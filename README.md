@@ -4,7 +4,8 @@ Use this SDK to communicate with AyanTech web services.
 
 ## Requirements
 
-- iOS 12.0+
+- iOS 12.0+ (callback API)
+- iOS 13.0+ (async/await API)
 - Swift 6.0+
 - Xcode 16+
 
@@ -81,6 +82,32 @@ request.send { response in
     print("parameters json object is: \(response.parametersJsonObject)")
 }
 ```
+
+## Async / await (iOS 13+)
+
+```swift
+let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .get)
+
+let task = Task {
+    let response = await request.send()
+    if response.error?.type == .cancelled { return }
+    print(response.responseString ?? "null")
+}
+
+// To cancel:
+task.cancel()
+```
+
+### Cancellation
+
+| API | Cancel method |
+|-----|---------------|
+| `send { }` (deprecated) | `request.cancel()` |
+| `await send()` (modern) | Cancel the `Task` — **`request.cancel()` does not work** |
+
+The modern async API uses `URLSession.data(for:)`, which does not expose a `URLSessionTask`. To cancel an in-flight async request, keep a reference to the `Task` and call `task.cancel()`.
+
+In SwiftUI, `.task { await request.send() }` cancels automatically when the view disappears.
 
 ## Mocking response:
 Good news 😍! you can mock your response using a response file.
