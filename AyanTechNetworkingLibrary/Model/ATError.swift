@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ATError: NSObject {
+public class ATError: NSObject, Error, @unchecked Sendable {
     public var persianDescription: String?
     public var code: Int?
     public var type: ATErrorType?
