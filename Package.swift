@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "AyanTechNetworkingLibrary",
     platforms: [
-        .iOS(.v12),
+        .iOS(.v13),
     ],
     products: [
         .library(
@@ -19,4 +19,3 @@ let package = Package(
             name: "AyanTechNetworkingLibrary", path: "AyanTechNetworkingLibrary"),
     ]
 )
-

@@ -6,7 +6,6 @@
 import Foundation
 
 extension Server {
-    @available(iOS 13.0, *)
     class func sendRequest(req: ATRequest) async -> (Data?, URLResponse?, Error?) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 

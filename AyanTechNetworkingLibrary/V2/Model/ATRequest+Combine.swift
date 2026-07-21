@@ -8,7 +8,6 @@ import Foundation
 
 public extension ATRequest {
     /// Always emits `ATResponse`. Inspect `response.error` for failures.
-    @available(iOS 13.0, *)
     func responsePublisher() -> AnyPublisher<ATResponse, Never> {
         Deferred {
             Future { promise in
@@ -26,7 +25,6 @@ public extension ATRequest {
     }
 
     /// Emits only on success. Network and API errors are delivered as `Failure`.
-    @available(iOS 13.0, *)
     func valuePublisher() -> AnyPublisher<ATResponse, ATError> {
         Deferred {
             Future<ATResponse, ATError> { promise in

@@ -6,7 +6,6 @@
 import Foundation
 
 extension ATRequest {
-    @available(iOS 13.0, *)
     public func send() async -> ATResponse {
         if let mockFile = self.mockFilePath, !mockFile.isEmpty {
             let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
