@@ -8,10 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		0502A30821031A0400F0332D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A30721031A0400F0332D /* AppDelegate.swift */; };
-		0502A30A21031A0400F0332D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A30921031A0400F0332D /* ViewController.swift */; };
+		0502A30A21031A0400F0332D /* DonationReferrerTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A30921031A0400F0332D /* DonationReferrerTypesViewController.swift */; };
 		0502A30D21031A0400F0332D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0502A30B21031A0400F0332D /* Main.storyboard */; };
 		0502A30F21031A0500F0332D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0502A30E21031A0500F0332D /* Assets.xcassets */; };
 		0502A31221031A0500F0332D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0502A31021031A0500F0332D /* LaunchScreen.storyboard */; };
+		D200002121031A3C00F0332D /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001121031A3C00F0332D /* AppDependencies.swift */; };
+		D200002221031A3C00F0332D /* ReferrerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001221031A3C00F0332D /* ReferrerType.swift */; };
+		D200002321031A3C00F0332D /* ReferrerTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001321031A3C00F0332D /* ReferrerTypeRepository.swift */; };
+		D200002421031A3C00F0332D /* GetReferrerTypesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001421031A3C00F0332D /* GetReferrerTypesUseCase.swift */; };
+		D200002521031A3C00F0332D /* DonationReferrerTypesRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001521031A3C00F0332D /* DonationReferrerTypesRemoteDataSource.swift */; };
+		D200002621031A3C00F0332D /* ReferrerTypeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001621031A3C00F0332D /* ReferrerTypeRepositoryImpl.swift */; };
+		D200002721031A3C00F0332D /* DonationReferrerTypesUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001721031A3C00F0332D /* DonationReferrerTypesUIState.swift */; };
+		D200002821031A3C00F0332D /* DonationReferrerTypesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001821031A3C00F0332D /* DonationReferrerTypesViewModel.swift */; };
+		D200002921031A3C00F0332D /* DonationReferrerTypesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001921031A3C00F0332D /* DonationReferrerTypesDTO.swift */; };
+		D200002A21031A3C00F0332D /* DonationReferrerTypesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200001A21031A3C00F0332D /* DonationReferrerTypesMapper.swift */; };
+		D300002121031A3C00F0332D /* AppNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D300001121031A3C00F0332D /* AppNetwork.swift */; };
+		D500002121031A3C00F0332D /* ATErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D500001121031A3C00F0332D /* ATErrorMapper.swift */; };
+		D600002121031A3C00F0332D /* ReferrerTypeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D600001121031A3C00F0332D /* ReferrerTypeUIModel.swift */; };
+		D700002121031A3C00F0332D /* ReferrerTypeSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700001121031A3C00F0332D /* ReferrerTypeSorter.swift */; };
 		D100000321031A3C00F0332D /* AyanTechNetworkingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D100000221031A3C00F0332D /* AyanTechNetworkingLibrary */; };
 		4B90944C9B8A7A2343A70B1A /* mock in Resources */ = {isa = PBXBuildFile; fileRef = 4B90920A3F47C7303086EB17 /* mock */; };
 /* End PBXBuildFile section */
@@ -19,11 +33,25 @@
 /* Begin PBXFileReference section */
 		0502A30421031A0400F0332D /* AyantechNetworkingLibraryDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AyantechNetworkingLibraryDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0502A30721031A0400F0332D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0502A30921031A0400F0332D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0502A30921031A0400F0332D /* DonationReferrerTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesViewController.swift; sourceTree = "<group>"; };
 		0502A30C21031A0400F0332D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0502A30E21031A0500F0332D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0502A31121031A0500F0332D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0502A31321031A0500F0332D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D200001121031A3C00F0332D /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		D200001221031A3C00F0332D /* ReferrerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerType.swift; sourceTree = "<group>"; };
+		D200001321031A3C00F0332D /* ReferrerTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerTypeRepository.swift; sourceTree = "<group>"; };
+		D200001421031A3C00F0332D /* GetReferrerTypesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReferrerTypesUseCase.swift; sourceTree = "<group>"; };
+		D200001521031A3C00F0332D /* DonationReferrerTypesRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesRemoteDataSource.swift; sourceTree = "<group>"; };
+		D200001621031A3C00F0332D /* ReferrerTypeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerTypeRepositoryImpl.swift; sourceTree = "<group>"; };
+		D200001721031A3C00F0332D /* DonationReferrerTypesUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesUIState.swift; sourceTree = "<group>"; };
+		D200001821031A3C00F0332D /* DonationReferrerTypesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesViewModel.swift; sourceTree = "<group>"; };
+		D200001921031A3C00F0332D /* DonationReferrerTypesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesDTO.swift; sourceTree = "<group>"; };
+		D200001A21031A3C00F0332D /* DonationReferrerTypesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesMapper.swift; sourceTree = "<group>"; };
+		D300001121031A3C00F0332D /* AppNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNetwork.swift; sourceTree = "<group>"; };
+		D500001121031A3C00F0332D /* ATErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATErrorMapper.swift; sourceTree = "<group>"; };
+		D600001121031A3C00F0332D /* ReferrerTypeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerTypeUIModel.swift; sourceTree = "<group>"; };
+		D700001121031A3C00F0332D /* ReferrerTypeSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerTypeSorter.swift; sourceTree = "<group>"; };
 		4B90920A3F47C7303086EB17 /* mock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mock; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,7 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				0502A30721031A0400F0332D /* AppDelegate.swift */,
-				0502A30921031A0400F0332D /* ViewController.swift */,
+				D200000121031A3C00F0332D /* App */,
+				D300000121031A3C00F0332D /* Networking */,
+				D200000221031A3C00F0332D /* Features */,
 				0502A30B21031A0400F0332D /* Main.storyboard */,
 				0502A30E21031A0500F0332D /* Assets.xcassets */,
 				0502A31021031A0500F0332D /* LaunchScreen.storyboard */,
@@ -67,6 +97,138 @@
 				4B90920A3F47C7303086EB17 /* mock */,
 			);
 			path = AyantechNetworkingLibraryDemo;
+			sourceTree = "<group>";
+		};
+		D200000121031A3C00F0332D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D200001121031A3C00F0332D /* AppDependencies.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D300000121031A3C00F0332D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D500001121031A3C00F0332D /* ATErrorMapper.swift */,
+				D300001121031A3C00F0332D /* AppNetwork.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D200000221031A3C00F0332D /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D200000321031A3C00F0332D /* DonationReferrerTypes */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D200000321031A3C00F0332D /* DonationReferrerTypes */ = {
+			isa = PBXGroup;
+			children = (
+				D200000421031A3C00F0332D /* UI */,
+				D200000521031A3C00F0332D /* Domain */,
+				D200000621031A3C00F0332D /* Data */,
+			);
+			path = DonationReferrerTypes;
+			sourceTree = "<group>";
+		};
+		D200000421031A3C00F0332D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0502A30921031A0400F0332D /* DonationReferrerTypesViewController.swift */,
+				D600001121031A3C00F0332D /* ReferrerTypeUIModel.swift */,
+				D200001721031A3C00F0332D /* DonationReferrerTypesUIState.swift */,
+				D200001821031A3C00F0332D /* DonationReferrerTypesViewModel.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D200000521031A3C00F0332D /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D200000721031A3C00F0332D /* Model */,
+				D200000821031A3C00F0332D /* Repository */,
+				D200000921031A3C00F0332D /* UseCase */,
+				D700000121031A3C00F0332D /* Helper */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D200000621031A3C00F0332D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D200000A21031A3C00F0332D /* Repository */,
+				D200000B21031A3C00F0332D /* Remote */,
+				D200000C21031A3C00F0332D /* DTO */,
+				D200000D21031A3C00F0332D /* Mapper */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		D200000721031A3C00F0332D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D200001221031A3C00F0332D /* ReferrerType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D200000821031A3C00F0332D /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				D200001321031A3C00F0332D /* ReferrerTypeRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		D200000921031A3C00F0332D /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				D200001421031A3C00F0332D /* GetReferrerTypesUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		D700000121031A3C00F0332D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D700001121031A3C00F0332D /* ReferrerTypeSorter.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		D200000A21031A3C00F0332D /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				D200001621031A3C00F0332D /* ReferrerTypeRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		D200000B21031A3C00F0332D /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				D200001521031A3C00F0332D /* DonationReferrerTypesRemoteDataSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		D200000C21031A3C00F0332D /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				D200001921031A3C00F0332D /* DonationReferrerTypesDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		D200000D21031A3C00F0332D /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				D200001A21031A3C00F0332D /* DonationReferrerTypesMapper.swift */,
+			);
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +309,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0502A30A21031A0400F0332D /* ViewController.swift in Sources */,
+				D200002121031A3C00F0332D /* AppDependencies.swift in Sources */,
+				D200002221031A3C00F0332D /* ReferrerType.swift in Sources */,
+				D200002321031A3C00F0332D /* ReferrerTypeRepository.swift in Sources */,
+				D200002421031A3C00F0332D /* GetReferrerTypesUseCase.swift in Sources */,
+				D200002521031A3C00F0332D /* DonationReferrerTypesRemoteDataSource.swift in Sources */,
+				D200002621031A3C00F0332D /* ReferrerTypeRepositoryImpl.swift in Sources */,
+				D200002721031A3C00F0332D /* DonationReferrerTypesUIState.swift in Sources */,
+				D200002821031A3C00F0332D /* DonationReferrerTypesViewModel.swift in Sources */,
+				D200002921031A3C00F0332D /* DonationReferrerTypesDTO.swift in Sources */,
+				D200002A21031A3C00F0332D /* DonationReferrerTypesMapper.swift in Sources */,
+				D300002121031A3C00F0332D /* AppNetwork.swift in Sources */,
+				D500002121031A3C00F0332D /* ATErrorMapper.swift in Sources */,
+				D600002121031A3C00F0332D /* ReferrerTypeUIModel.swift in Sources */,
+				D700002121031A3C00F0332D /* ReferrerTypeSorter.swift in Sources */,
+				0502A30A21031A0400F0332D /* DonationReferrerTypesViewController.swift in Sources */,
 				0502A30821031A0400F0332D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

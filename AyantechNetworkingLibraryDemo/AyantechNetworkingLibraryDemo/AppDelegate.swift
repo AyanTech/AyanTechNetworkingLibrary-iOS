@@ -6,17 +6,21 @@
 //  Copyright © 2018 Ayantech. All rights reserved.
 //
 
-import UIKit
 import AyanTechNetworkingLibrary
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let dependencies = AppDependencies()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ATRequest.Configuration.noProxy = true
+
+        let viewController = window?.rootViewController as? DonationReferrerTypesViewController
+        viewController?.viewModel = dependencies.makeDonationReferrerTypesViewModel()
         return true
     }
 
@@ -44,4 +48,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
