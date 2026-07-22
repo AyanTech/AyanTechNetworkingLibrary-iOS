@@ -7,11 +7,11 @@ import AyanTechNetworkingLibrary
 import Combine
 
 final class ReferrerTypeRepositoryImpl: ReferrerTypeRepository {
-    private let remoteDataSource: DonationReferrerTypesRemoteDataSource
+    private let remoteDataSource: DonationReferrerTypesRemoteDataSourceProtocol
     private let mapper: DonationReferrerTypesMapper
 
     init(
-        remoteDataSource: DonationReferrerTypesRemoteDataSource,
+        remoteDataSource: DonationReferrerTypesRemoteDataSourceProtocol,
         mapper: DonationReferrerTypesMapper
     ) {
         self.remoteDataSource = remoteDataSource

@@ -3,7 +3,6 @@
 //  AyantechNetworkingLibraryDemo
 //
 
-import AyanTechNetworkingLibrary
 import Combine
 import Foundation
 
@@ -11,10 +10,10 @@ import Foundation
 final class DonationReferrerTypesViewModel {
     @Published private(set) var state: DonationReferrerTypesUIState = .idle
 
-    private let getReferrerTypesUseCase: GetReferrerTypesUseCase
+    private let getReferrerTypesUseCase: GetReferrerTypesUseCaseProtocol
     private var requestCancellable: AnyCancellable?
 
-    init(getReferrerTypesUseCase: GetReferrerTypesUseCase) {
+    init(getReferrerTypesUseCase: GetReferrerTypesUseCaseProtocol) {
         self.getReferrerTypesUseCase = getReferrerTypesUseCase
     }
 

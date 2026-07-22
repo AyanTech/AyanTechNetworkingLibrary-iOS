@@ -6,18 +6,20 @@
 import AyanTechNetworkingLibrary
 import Combine
 
-final class DonationReferrerTypesRemoteDataSource {
-    private let appNetwork: AppNetwork
-    private let url: String
+protocol DonationReferrerTypesRemoteDataSourceProtocol {
+    func getReferrerTypes(input: DonationReferrerTypesRequestDTO) -> AnyPublisher<DonationReferrerTypesDTO, ATError>
+}
 
-    init(appNetwork: AppNetwork, url: String) {
+final class DonationReferrerTypesRemoteDataSource: DonationReferrerTypesRemoteDataSourceProtocol {
+    private let appNetwork: AppNetwork
+
+    init(appNetwork: AppNetwork) {
         self.appNetwork = appNetwork
-        self.url = url
     }
 
     func getReferrerTypes(input: DonationReferrerTypesRequestDTO) -> AnyPublisher<DonationReferrerTypesDTO, ATError> {
         appNetwork.post(
-            url: url,
+            url: DonationReferrerTypesAPI.getReferrerTypesURL,
             parameters: input
         )
     }

@@ -26,6 +26,7 @@
 		D500002121031A3C00F0332D /* ATErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D500001121031A3C00F0332D /* ATErrorMapper.swift */; };
 		D600002121031A3C00F0332D /* ReferrerTypeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D600001121031A3C00F0332D /* ReferrerTypeUIModel.swift */; };
 		D700002121031A3C00F0332D /* ReferrerTypeSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700001121031A3C00F0332D /* ReferrerTypeSorter.swift */; };
+		D900002121031A3C00F0332D /* DonationReferrerTypesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D900001121031A3C00F0332D /* DonationReferrerTypesAPI.swift */; };
 		D100000321031A3C00F0332D /* AyanTechNetworkingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D100000221031A3C00F0332D /* AyanTechNetworkingLibrary */; };
 		4B90944C9B8A7A2343A70B1A /* mock in Resources */ = {isa = PBXBuildFile; fileRef = 4B90920A3F47C7303086EB17 /* mock */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		D500001121031A3C00F0332D /* ATErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATErrorMapper.swift; sourceTree = "<group>"; };
 		D600001121031A3C00F0332D /* ReferrerTypeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerTypeUIModel.swift; sourceTree = "<group>"; };
 		D700001121031A3C00F0332D /* ReferrerTypeSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferrerTypeSorter.swift; sourceTree = "<group>"; };
+		D900001121031A3C00F0332D /* DonationReferrerTypesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationReferrerTypesAPI.swift; sourceTree = "<group>"; };
 		4B90920A3F47C7303086EB17 /* mock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mock; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 		D200000B21031A3C00F0332D /* Remote */ = {
 			isa = PBXGroup;
 			children = (
+				D900001121031A3C00F0332D /* DonationReferrerTypesAPI.swift */,
 				D200001521031A3C00F0332D /* DonationReferrerTypesRemoteDataSource.swift */,
 			);
 			path = Remote;
@@ -323,6 +326,7 @@
 				D500002121031A3C00F0332D /* ATErrorMapper.swift in Sources */,
 				D600002121031A3C00F0332D /* ReferrerTypeUIModel.swift in Sources */,
 				D700002121031A3C00F0332D /* ReferrerTypeSorter.swift in Sources */,
+				D900002121031A3C00F0332D /* DonationReferrerTypesAPI.swift in Sources */,
 				0502A30A21031A0400F0332D /* DonationReferrerTypesViewController.swift in Sources */,
 				0502A30821031A0400F0332D /* AppDelegate.swift in Sources */,
 			);

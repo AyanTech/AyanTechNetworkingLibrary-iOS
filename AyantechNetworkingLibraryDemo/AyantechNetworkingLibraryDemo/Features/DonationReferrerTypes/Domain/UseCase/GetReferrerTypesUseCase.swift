@@ -6,7 +6,11 @@
 import AyanTechNetworkingLibrary
 import Combine
 
-struct GetReferrerTypesUseCase {
+protocol GetReferrerTypesUseCaseProtocol {
+    func execute() -> AnyPublisher<[ReferrerType], ATError>
+}
+
+struct GetReferrerTypesUseCase: GetReferrerTypesUseCaseProtocol {
     private let repository: ReferrerTypeRepository
     private let sorter: ReferrerTypeSorter
 

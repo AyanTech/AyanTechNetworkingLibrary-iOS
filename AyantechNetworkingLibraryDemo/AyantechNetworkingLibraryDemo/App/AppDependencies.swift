@@ -13,8 +13,7 @@ final class AppDependencies {
 
     func makeDonationReferrerTypesViewModel() -> DonationReferrerTypesViewModel {
         let dataSource = DonationReferrerTypesRemoteDataSource(
-            appNetwork: appNetwork,
-            url: "https://application.billingsystem.ayantech.ir/WebServices/Core.svc/DonationServiceGerReferrerTypeList"
+            appNetwork: appNetwork
         )
         let mapper = DonationReferrerTypesMapper()
         let repository = ReferrerTypeRepositoryImpl(
