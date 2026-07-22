@@ -8,12 +8,15 @@
 
 import Foundation
 
-public final class ATResponse: @unchecked Sendable {
+public struct ATResponse: Sendable {
     public var responseString: String?
     public var error: ATError?
     public var status: Status?
     public var responseCode = -1
-    public var headers = [AnyHashable: Any]()
+    public var headers = [String: String]()
+
+    public init() {}
+
     public var parametersJsonObject: JSONObject? {
         return getJsonObject(responseJsonObject, ["Parameters"])
     }
@@ -38,15 +41,15 @@ public final class ATResponse: @unchecked Sendable {
         return status?.isSuccess ?? false
     }
 
-    class func from(mockFilePath: String) -> (ATResponse, Double) {
-        let result = ATResponse()
+    static func from(mockFilePath: String) -> (ATResponse, Double) {
+        var result = ATResponse()
         var delay: Double = 0
         if let fileInputStream = InputStream(fileAtPath: mockFilePath) {
             fileInputStream.open()
             if let mockJson = (try? JSONSerialization.jsonObject(with: fileInputStream, options: .allowFragments) as? JSONObject) {
                 if let headers = getJsonObject(mockJson, ["headers"]) {
                     headers.forEach {
-                        result.headers[$0] = $1
+                        result.headers[$0] = String(describing: $1)
                     }
                 }
                 if let bodyString = getString(mockJson, ["body"]) {
@@ -71,11 +74,13 @@ public final class ATResponse: @unchecked Sendable {
         return (result, delay)
     }
 
-    class func from(responseData: Data?, responseHeaders: URLResponse?, responseError: Error?) -> ATResponse {
-        let result = ATResponse()
+    static func from(responseData: Data?, responseHeaders: URLResponse?, responseError: Error?) -> ATResponse {
+        var result = ATResponse()
         let responseHeaders = (responseHeaders as? HTTPURLResponse)
         result.responseCode = responseHeaders?.statusCode ?? -1
-        result.headers = responseHeaders?.allHeaderFields ?? [:]
+        responseHeaders?.allHeaderFields.forEach { key, value in
+            result.headers[String(describing: key)] = String(describing: value)
+        }
         if result.responseCode / 10 == 20 {
             if let data = responseData, let jsonString = String(data: data, encoding: .utf8) {
                 result.responseString = jsonString
@@ -93,23 +98,25 @@ public final class ATResponse: @unchecked Sendable {
         return result
     }
 
-    public class Status {
+    public struct Status: Sendable {
         public var errorCodeString: String?
         public var description: String?
 
-        public class var tokenExpiredCode: String {
+        public static var tokenExpiredCode: String {
             return "G00002"
         }
+
+        public init() {}
 
         public var isSuccess: Bool {
             return errorCodeString == kResponseSuccessCode
         }
 
-        class func from(json object: JSONObject?) -> Status? {
+        static func from(json object: JSONObject?) -> Status? {
             guard let object = object else {
                 return nil
             }
-            let result = Status()
+            var result = Status()
             result.errorCodeString = getString(object, ["Code"])
             result.description = getString(object, ["Description"])
             return result

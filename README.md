@@ -8,6 +8,13 @@ Use this SDK to communicate with AyanTech web services.
 - Swift 6.0+
 - Xcode 16+
 
+## Changes
+
+### response header type
+
+`ATResponse.headers` changed from `[AnyHashable: Any]` to `[String: String]` so that `ATResponse` can safely conform to `Sendable`. HTTP header names and values are now represented as strings.
+
+
 ## Installation
 
 ### CocoaPods
@@ -233,7 +240,7 @@ ATRequest.request(url: "http://api.ayantech.ir/sampleApi", method: .get)
 ### ATResponse:
 |       Property       |      Type      | Description                                                          |
 |:--------------------:|:--------------:|----------------------------------------------------------------------|
-| headers              | \[AnyHashable: Any\]| Response headers map                                          |
+| headers              | [String: String] | Response headers map with string names and values                  |
 | responseString       | String?        | Response raw body in String                                          |
 | status               | Status?        | Response Status object (if exist)                                    |
 | error                | ATError?       | Response error (if status code is something other than 20x)          |

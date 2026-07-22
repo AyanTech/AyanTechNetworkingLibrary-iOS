@@ -8,21 +8,23 @@
 
 import Foundation
 
-public class ATError: NSObject, Error, @unchecked Sendable {
+public struct ATError: Error, Sendable {
     public var persianDescription: String?
     public var code: Int?
     public var type: ATErrorType?
     public var name: String!
+
+    public init() {}
     
-    public class var generalError: ATError {
-        let result = ATError()
+    public static var generalError: ATError {
+        var result = ATError()
         result.code = -1
         result.type = .general
         return result
     }
     
-    class func from(error: Error?) -> ATError {
-        let result = ATError.generalError
+    static func from(error: Error?) -> ATError {
+        var result = ATError.generalError
         if let error = error as? URLError {
             result.code = error.errorCode
             result.type = ATErrorType.from(error: error)
@@ -32,11 +34,11 @@ public class ATError: NSObject, Error, @unchecked Sendable {
         return result
     }
     
-    class func from(status: ATResponse.Status?) -> ATError? {
+    static func from(status: ATResponse.Status?) -> ATError? {
         if status == nil || status?.errorCodeString == kResponseSuccessCode {
             return nil
         } else {
-            let result = ATError.generalError
+            var result = ATError.generalError
             result.code = -1
             result.persianDescription = status?.description ?? result.persianDescription
             result.name = ""
@@ -45,7 +47,7 @@ public class ATError: NSObject, Error, @unchecked Sendable {
     }
 }
 
-@objc public enum ATErrorType: Int {
+@objc public enum ATErrorType: Int, Sendable {
     case noInternet
     case timeout
     case serverError

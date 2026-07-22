@@ -12,7 +12,7 @@ struct ATErrorMapper {
             return atError
         }
 
-        let atError = ATError.generalError
+        var atError = ATError.generalError
         atError.persianDescription = error.localizedDescription
         return atError
     }
