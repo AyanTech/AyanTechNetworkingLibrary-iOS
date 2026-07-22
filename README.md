@@ -4,8 +4,7 @@ Use this SDK to communicate with AyanTech web services.
 
 ## Requirements
 
-- iOS 12.0+ (callback API)
-- iOS 13.0+ (async/await API)
+- iOS 13.0+
 - Swift 6.0+
 - Xcode 16+
 
@@ -65,9 +64,63 @@ ATRequest.Configuration.setLoggerLevel(.none)
 #endif
 ```
 
-## Usage:
+## Usage
+
+### Combine
+
+Use `valuePublisher()` when network and API errors should be emitted as `ATError`:
+
 ```swift
-//method can be omitted (default is POST)
+import AyanTechNetworkingLibrary
+import Combine
+
+var cancellables = Set<AnyCancellable>()
+
+ATRequest.request(
+    url: "https://ayantech.ir/some/endpoint/url",
+    method: .post
+)
+.setJsonBody(body: [
+    "Parameters": [
+        "ParamA": "ValueA",
+        "ParamB": "ValueB"
+    ]
+])
+.valuePublisher()
+.sink(
+    receiveCompletion: { completion in
+        if case let .failure(error) = completion {
+            print(error.persianDescription ?? "Unknown error")
+        }
+    },
+    receiveValue: { response in
+        print(response.parametersJsonObject ?? [:])
+    }
+)
+.store(in: &cancellables)
+```
+
+Use `responsePublisher()` when you always want an `ATResponse` and prefer to inspect `response.error` yourself. Its failure type is `Never`.
+
+### Async/await
+
+```swift
+let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .get)
+
+let task = Task {
+    let response = await request.send()
+    if response.error?.type == .cancelled { return }
+    print(response.responseString ?? "null")
+}
+
+// To cancel:
+task.cancel()
+```
+
+### Callback (deprecated)
+
+```swift
+// Method can be omitted; the default is POST.
 let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .post)
 request.setJsonBody(body: [
     "Parameters": [
@@ -83,27 +136,15 @@ request.send { response in
 }
 ```
 
-## Async / await (iOS 13+)
-
-```swift
-let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .get)
-
-let task = Task {
-    let response = await request.send()
-    if response.error?.type == .cancelled { return }
-    print(response.responseString ?? "null")
-}
-
-// To cancel:
-task.cancel()
-```
-
 ### Cancellation
 
 | API | Cancel method |
 |-----|---------------|
+| `valuePublisher()` / `responsePublisher()` | Cancel the `AnyCancellable` subscription |
 | `send { }` (deprecated) | `request.cancel()` |
 | `await send()` (modern) | Cancel the `Task` — **`request.cancel()` does not work** |
+
+Cancelling an `AnyCancellable` stops publisher events from reaching the subscriber. The underlying async request may continue after the subscription is cancelled.
 
 The modern async API uses `URLSession.data(for:)`, which does not expose a `URLSessionTask`. To cancel an in-flight async request, keep a reference to the `Task` and call `task.cancel()`.
 
