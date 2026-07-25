@@ -1,11 +1,11 @@
 //
-//  Server+Logging.swift
+//  NetworkClient+Logging.swift
 //  AyanTechNetworkingLibrary
 //
 
 import Foundation
 
-extension Server {
+extension NetworkClient {
     class func logRequest(_ req: ATRequest) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
     }

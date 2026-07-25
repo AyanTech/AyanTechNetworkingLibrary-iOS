@@ -11,7 +11,7 @@
 		0502A2E72103182F00F0332D /* ATError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E32103182F00F0332D /* ATError.swift */; };
 		0502A2E82103182F00F0332D /* ATRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E42103182F00F0332D /* ATRequest.swift */; };
 		0502A2E92103182F00F0332D /* ATResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E52103182F00F0332D /* ATResponse.swift */; };
-		0502A2EA2103182F00F0332D /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E62103182F00F0332D /* Server.swift */; };
+		0502A2EA2103182F00F0332D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2E62103182F00F0332D /* NetworkClient.swift */; };
 		0502A2EC2103186400F0332D /* ATLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2EB2103186400F0332D /* ATLog.swift */; };
 		0502A2EE2103188700F0332D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2ED2103188700F0332D /* Utils.swift */; };
 		0502A2F4210318A500F0332D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502A2F0210318A400F0332D /* Double.swift */; };
@@ -26,7 +26,7 @@
 		C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E90300656A000F640CC /* URLRequestBuilder.swift */; };
 		C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E92300656A000F640CC /* URLSessionBuilder.swift */; };
 		C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA0300656B000F640CC /* ATRequest+Combine.swift */; };
-		C3008EA3300657C000F640CC /* Server+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA2300657C000F640CC /* Server+Logging.swift */; };
+		C3008EA3300657C000F640CC /* NetworkClient+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA2300657C000F640CC /* NetworkClient+Logging.swift */; };
 		C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,7 @@
 		0502A2E32103182F00F0332D /* ATError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATError.swift; sourceTree = "<group>"; };
 		0502A2E42103182F00F0332D /* ATRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATRequest.swift; sourceTree = "<group>"; };
 		0502A2E52103182F00F0332D /* ATResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATResponse.swift; sourceTree = "<group>"; };
-		0502A2E62103182F00F0332D /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		0502A2E62103182F00F0332D /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		0502A2EB2103186400F0332D /* ATLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATLog.swift; sourceTree = "<group>"; };
 		0502A2ED2103188700F0332D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0502A2F0210318A400F0332D /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		C3008E90300656A000F640CC /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		C3008E92300656A000F640CC /* URLSessionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionBuilder.swift; sourceTree = "<group>"; };
 		C3008EA0300656B000F640CC /* ATRequest+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+Combine.swift"; sourceTree = "<group>"; };
-		C3008EA2300657C000F640CC /* Server+Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Logging.swift"; sourceTree = "<group>"; };
+		C3008EA2300657C000F640CC /* NetworkClient+Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkClient+Logging.swift"; sourceTree = "<group>"; };
 		C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATResponse+Decodable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +128,7 @@
 				0502A2EB2103186400F0332D /* ATLog.swift */,
 				0502A2E52103182F00F0332D /* ATResponse.swift */,
 				0502A2ED2103188700F0332D /* Utils.swift */,
-				0502A2E62103182F00F0332D /* Server.swift */,
+				0502A2E62103182F00F0332D /* NetworkClient.swift */,
 				05D0C0CE211F19130025EC73 /* HTTPMethod.swift */,
 			);
 			path = Model;
@@ -148,7 +148,7 @@
 			children = (
 				C3008EA0300656B000F640CC /* ATRequest+Combine.swift */,
 				C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */,
-				C3008EA2300657C000F640CC /* Server+Logging.swift */,
+				C3008EA2300657C000F640CC /* NetworkClient+Logging.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 				0502A2E82103182F00F0332D /* ATRequest.swift in Sources */,
 				0502A2E72103182F00F0332D /* ATError.swift in Sources */,
 				056527B0223CCDDA009CE9D6 /* URLSession.swift in Sources */,
-				0502A2EA2103182F00F0332D /* Server.swift in Sources */,
+				0502A2EA2103182F00F0332D /* NetworkClient.swift in Sources */,
 				0502A2EC2103186400F0332D /* ATLog.swift in Sources */,
 				0502A2E92103182F00F0332D /* ATResponse.swift in Sources */,
 				0502A2EE2103188700F0332D /* Utils.swift in Sources */,
@@ -254,7 +254,7 @@
 				05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */,
 				C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */,
 				C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */,
-				C3008EA3300657C000F640CC /* Server+Logging.swift in Sources */,
+				C3008EA3300657C000F640CC /* NetworkClient+Logging.swift in Sources */,
 				C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */,
 				C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */,
 				05AAC07221561F8A00D0A1D1 /* Notification.swift in Sources */,

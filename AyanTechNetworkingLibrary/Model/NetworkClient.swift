@@ -1,5 +1,5 @@
 //
-//  Server.swift
+//  NetworkClient.swift
 //  InquirySDKLib
 //
 //  Created by Sepehr Behroozi on 6/25/18.
@@ -10,7 +10,7 @@ import Foundation
 
 internal let kResponseSuccessCode = "G00000"
 
-class Server {
+class NetworkClient {
     nonisolated(unsafe) static var logger: ATNetworkLogging = DefaultATNetworkLogger()
     
     static let defaultUrlSession: URLSession = {
@@ -20,7 +20,7 @@ class Server {
     class func sendSyncRequest(req: ATRequest) -> (Data?, URLResponse?, Error?) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
-        let request = URLRequestBuilder.make(from: req)
+        let request = URLRequestBuilder.build(from: req)
         
         let result = URLSession.shared.synchronousDataTask(with: request)
 
@@ -41,8 +41,8 @@ class Server {
     class func sendRequest(req: ATRequest, responseHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) {
         logger.logRequest(url: req.url, method: req.method, headers: req.headers, body: req.body)
 
-        let request = URLRequestBuilder.make(from: req)
-        req.task = Server.defaultUrlSession.dataTask(with: request) { data, response, error in
+        let request = URLRequestBuilder.build(from: req)
+        req.task = NetworkClient.defaultUrlSession.dataTask(with: request) { data, response, error in
             let responseCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             let responseHeaders = ((response as? HTTPURLResponse)?.allHeaderFields as? [String: String]) ?? [:]
             logger.logResponse(

@@ -21,12 +21,12 @@ public extension ATRequest {
                     .eraseToAnyPublisher()
             }
 
-            Server.logRequest(self)
-            let request = URLRequestBuilder.make(from: self)
+            NetworkClient.logRequest(self)
+            let request = URLRequestBuilder.build(from: self)
 
-            return Server.defaultUrlSession.dataTaskPublisher(for: request)
+            return NetworkClient.defaultUrlSession.dataTaskPublisher(for: request)
                 .map { data, response in
-                    Server.logResponse(for: self, data: data, response: response)
+                    NetworkClient.logResponse(for: self, data: data, response: response)
                     return ATResponse.from(
                         responseData: data,
                         responseHeaders: response,
@@ -34,7 +34,7 @@ public extension ATRequest {
                     )
                 }
                 .catch { error in
-                    Server.logResponse(for: self, data: nil, response: nil)
+                    NetworkClient.logResponse(for: self, data: nil, response: nil)
                     return Just(
                         ATResponse.from(
                             responseData: nil,

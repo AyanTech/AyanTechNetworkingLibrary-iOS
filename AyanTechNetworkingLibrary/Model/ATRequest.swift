@@ -108,7 +108,7 @@ public final class ATRequest: @unchecked Sendable {
                 responseHandler?(responseAndDelay.0)
             }
         } else {
-            Server.sendRequest(req: self) { responseData, headers, error in
+            NetworkClient.sendRequest(req: self) { responseData, headers, error in
                 let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
                 if atResponse.error?.type == .cancelled {
                     return
@@ -125,7 +125,7 @@ public final class ATRequest: @unchecked Sendable {
             Utils.sleep(seconds: responseAndDelay.1)
             return responseAndDelay.0
         } else {
-            let responseCollection = Server.sendSyncRequest(req: self)
+            let responseCollection = NetworkClient.sendSyncRequest(req: self)
             let atResponse = ATResponse.from(responseData: responseCollection.0, responseHeaders: responseCollection.1, responseError: responseCollection.2)
             return atResponse
         }
@@ -140,15 +140,15 @@ public final class ATRequest: @unchecked Sendable {
         }
 
         public static func setLogger(logger: ATNetworkLogging) {
-            Server.logger = logger
+            NetworkClient.logger = logger
         }
 
         public static func setLoggerLevel(_ level: ATLoggerLevel) {
             switch level {
             case .default:
-                Server.logger = DefaultATNetworkLogger()
+                NetworkClient.logger = DefaultATNetworkLogger()
             case .none:
-                Server.logger = SilentATNetworkLogger()
+                NetworkClient.logger = SilentATNetworkLogger()
             }
         }
     }

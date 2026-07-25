@@ -6,7 +6,7 @@
 import Foundation
 
 enum URLRequestBuilder {
-    static func make(from req: ATRequest) -> URLRequest {
+    static func build(from req: ATRequest) -> URLRequest {
         var request = URLRequest(
             url: URL(string: req.url)!,
             cachePolicy: .reloadIgnoringLocalCacheData,
