@@ -151,7 +151,7 @@ request.send { response in
 | `send { }` (deprecated) | `request.cancel()` |
 | `await send()` (modern) | Cancel the `Task` — **`request.cancel()` does not work** |
 
-Cancelling an `AnyCancellable` stops publisher events from reaching the subscriber. The underlying async request may continue after the subscription is cancelled.
+Cancelling an `AnyCancellable` cancels the underlying `URLSessionDataTask`. As with standard Combine publishers, cancellation does not emit an additional value or completion.
 
 The modern async API uses `URLSession.data(for:)`, which does not expose a `URLSessionTask`. To cancel an in-flight async request, keep a reference to the `Task` and call `task.cancel()`.
 

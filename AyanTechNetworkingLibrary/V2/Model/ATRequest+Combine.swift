@@ -8,49 +8,59 @@ import Foundation
 
 public extension ATRequest {
     /// Always emits `ATResponse`. Inspect `response.error` for failures.
+    ///
+    /// Cancelling the subscription cancels the underlying URL session task.
     func responsePublisher() -> AnyPublisher<ATResponse, Never> {
         Deferred {
-            Future { promise in
-                let resolve = FuturePromise(promise: promise)
-                Task {
-                    let response = await self.send()
-                    resolve.complete(with: .success(response))
-                }
+            if let mockFile = self.mockFilePath, !mockFile.isEmpty {
+                let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
+                return Just(responseAndDelay.0)
+                    .delay(
+                        for: .seconds(max(0, responseAndDelay.1)),
+                        scheduler: DispatchQueue.main
+                    )
+                    .eraseToAnyPublisher()
             }
-        }
-        .compactMap { response in
-            response.error?.type == .cancelled ? nil : response
+
+            Server.logRequest(self)
+            let request = URLRequestBuilder.make(from: self)
+
+            return Server.defaultUrlSession.dataTaskPublisher(for: request)
+                .map { data, response in
+                    Server.logResponse(for: self, data: data, response: response)
+                    return ATResponse.from(
+                        responseData: data,
+                        responseHeaders: response,
+                        responseError: nil
+                    )
+                }
+                .catch { error in
+                    Server.logResponse(for: self, data: nil, response: nil)
+                    return Just(
+                        ATResponse.from(
+                            responseData: nil,
+                            responseHeaders: nil,
+                            responseError: error
+                        )
+                    )
+                }
+                .eraseToAnyPublisher()
         }
         .eraseToAnyPublisher()
     }
 
     /// Emits only on success. Network and API errors are delivered as `Failure`.
     func valuePublisher() -> AnyPublisher<ATResponse, ATError> {
-        Deferred {
-            Future<ATResponse, ATError> { promise in
-                let resolve = FuturePromise(promise: promise)
-                Task {
-                    let response = await self.send()
-                    if let error = response.error {
-                        resolve.complete(with: .failure(error))
-                    } else {
-                        resolve.complete(with: .success(response))
-                    }
+        responsePublisher()
+            .tryMap { response in
+                if let error = response.error {
+                    throw error
                 }
+                return response
             }
-        }
-        .eraseToAnyPublisher()
-    }
-}
-
-private struct FuturePromise<Output, Failure: Error>: @unchecked Sendable where Output: Sendable {
-    private let promise: (Result<Output, Failure>) -> Void
-
-    init(promise: @escaping (Result<Output, Failure>) -> Void) {
-        self.promise = promise
-    }
-
-    func complete(with result: Result<Output, Failure>) {
-        promise(result)
+            .mapError { error in
+                (error as? ATError) ?? .generalError
+            }
+            .eraseToAnyPublisher()
     }
 }
