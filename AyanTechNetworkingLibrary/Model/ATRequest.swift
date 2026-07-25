@@ -91,7 +91,7 @@ public final class ATRequest: @unchecked Sendable {
         self.task?.cancel()
     }
 
-    @available(*, deprecated, message: "Use async send() instead.")
+    @available(*, deprecated, message: "Use responsePublisher() or valuePublisher() instead.")
     public func send(responseHandler: BaseResponseHandler?) {
         if self.tokenValidationRequired, !self.delegate!.atRequestIsTokenValid!() {
             guard self.isTokenValid else {
@@ -118,7 +118,7 @@ public final class ATRequest: @unchecked Sendable {
         }
     }
 
-    @available(*, deprecated, message: "Use async send() instead. Synchronous network requests block the current thread.")
+    @available(*, deprecated, message: "Use responsePublisher() or valuePublisher() instead. Synchronous network requests block the current thread.")
     public func sendSync() -> ATResponse {
         if let mockFile = self.mockFilePath, !mockFile.isEmpty {
             let responseAndDelay = ATResponse.from(mockFilePath: mockFile)

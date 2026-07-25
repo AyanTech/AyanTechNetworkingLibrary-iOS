@@ -23,8 +23,6 @@
 		05AAC07221561F8A00D0A1D1 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC07121561F8A00D0A1D1 /* Notification.swift */; };
 		05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0CE211F19130025EC73 /* HTTPMethod.swift */; };
 		05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */; };
-		C3008E8E30064B9000F640CC /* ATRequest+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E8D30064B9000F640CC /* ATRequest+Async.swift */; };
-		C3008E9030064B9000F640CC /* Server+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E8F30064B9000F640CC /* Server+Async.swift */; };
 		C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E90300656A000F640CC /* URLRequestBuilder.swift */; };
 		C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E92300656A000F640CC /* URLSessionBuilder.swift */; };
 		C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA0300656B000F640CC /* ATRequest+Combine.swift */; };
@@ -52,8 +50,6 @@
 		05AAC07121561F8A00D0A1D1 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		05D0C0CE211F19130025EC73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONObject.swift; sourceTree = "<group>"; };
-		C3008E8D30064B9000F640CC /* ATRequest+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+Async.swift"; sourceTree = "<group>"; };
-		C3008E8F30064B9000F640CC /* Server+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Async.swift"; sourceTree = "<group>"; };
 		C3008E90300656A000F640CC /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		C3008E92300656A000F640CC /* URLSessionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionBuilder.swift; sourceTree = "<group>"; };
 		C3008EA0300656B000F640CC /* ATRequest+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+Combine.swift"; sourceTree = "<group>"; };
@@ -150,10 +146,8 @@
 		C3008E8E3006534000F640CC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C3008E8D30064B9000F640CC /* ATRequest+Async.swift */,
 				C3008EA0300656B000F640CC /* ATRequest+Combine.swift */,
 				C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */,
-				C3008E8F30064B9000F640CC /* Server+Async.swift */,
 				C3008EA2300657C000F640CC /* Server+Logging.swift */,
 			);
 			path = Model;
@@ -258,10 +252,8 @@
 				05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */,
 				0502A2F7210318A500F0332D /* Int.swift in Sources */,
 				05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */,
-				C3008E8E30064B9000F640CC /* ATRequest+Async.swift in Sources */,
 				C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */,
 				C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */,
-				C3008E9030064B9000F640CC /* Server+Async.swift in Sources */,
 				C3008EA3300657C000F640CC /* Server+Logging.swift in Sources */,
 				C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */,
 				C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */,

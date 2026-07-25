@@ -126,21 +126,6 @@ Use `valuePublisher(as:decoder:)` to decode the `Parameters` object into a `Deco
 
 Use `responsePublisher()` when you always want an `ATResponse` and prefer to inspect `response.error` yourself. Its failure type is `Never`.
 
-### Async/await
-
-```swift
-let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .get)
-
-let task = Task {
-    let response = await request.send()
-    if response.error?.type == .cancelled { return }
-    print(response.responseString ?? "null")
-}
-
-// To cancel:
-task.cancel()
-```
-
 ### Callback (deprecated)
 
 ```swift
@@ -166,13 +151,8 @@ request.send { response in
 |-----|---------------|
 | `valuePublisher()` / `responsePublisher()` | Cancel the `AnyCancellable` subscription |
 | `send { }` (deprecated) | `request.cancel()` |
-| `await send()` (modern) | Cancel the `Task` — **`request.cancel()` does not work** |
 
 Cancelling an `AnyCancellable` cancels the underlying `URLSessionDataTask`. As with standard Combine publishers, cancellation does not emit an additional value or completion.
-
-The modern async API uses `URLSession.data(for:)`, which does not expose a `URLSessionTask`. To cancel an in-flight async request, keep a reference to the `Task` and call `task.cancel()`.
-
-In SwiftUI, `.task { await request.send() }` cancels automatically when the view disappears.
 
 ## Mocking response:
 Good news 😍! you can mock your response using a response file.
