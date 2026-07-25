@@ -8,7 +8,6 @@ import Foundation
 
 public extension ATRequest {
     /// Always emits `ATResponse`. Inspect `response.error` for failures.
-    ///
     /// Cancelling the subscription cancels the underlying URL session task.
     func responsePublisher() -> AnyPublisher<ATResponse, Never> {
         Deferred {
@@ -58,6 +57,19 @@ public extension ATRequest {
                 }
                 return response
             }
+            .mapError { error in
+                (error as? ATError) ?? .generalError
+            }
+            .eraseToAnyPublisher()
+    }
+
+    /// Emits a decoded `Parameters` value on success. Network, API, and decoding errors are delivered as `Failure`.
+    func valuePublisher<T: Decodable>(
+        as type: T.Type = T.self,
+        decoder: JSONDecoder = JSONDecoder()
+    ) -> AnyPublisher<T, ATError> {
+        valuePublisher()
+            .tryMap { try $0.decodeParameters(as: type, decoder: decoder) }
             .mapError { error in
                 (error as? ATError) ?? .generalError
             }

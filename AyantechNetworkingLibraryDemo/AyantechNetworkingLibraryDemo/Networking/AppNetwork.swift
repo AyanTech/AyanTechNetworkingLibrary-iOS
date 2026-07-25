@@ -44,19 +44,7 @@ final class AppNetwork {
                 body: body,
                 ignoreParameterCreator: true
             )
-            .valuePublisher()
-            .tryMap { response in
-                guard let parameters = response.parametersJsonObject,
-                      JSONSerialization.isValidJSONObject(parameters)
-                else {
-                    throw URLError(.cannotParseResponse)
-                }
-
-                let data = try JSONSerialization.data(withJSONObject: parameters)
-                return try self.decoder.decode(Output.self, from: data)
-            }
-            .mapError { self.errorMapper.toATError($0) }
-            .eraseToAnyPublisher()
+            .valuePublisher(as: Output.self, decoder: decoder)
     }
 
     private func makeRequestBody<Input: Encodable>(parameters: Input) throws -> JSONObject {

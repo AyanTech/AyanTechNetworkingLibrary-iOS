@@ -29,6 +29,7 @@
 		C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E92300656A000F640CC /* URLSessionBuilder.swift */; };
 		C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA0300656B000F640CC /* ATRequest+Combine.swift */; };
 		C3008EA3300657C000F640CC /* Server+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA2300657C000F640CC /* Server+Logging.swift */; };
+		C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		C3008E92300656A000F640CC /* URLSessionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionBuilder.swift; sourceTree = "<group>"; };
 		C3008EA0300656B000F640CC /* ATRequest+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+Combine.swift"; sourceTree = "<group>"; };
 		C3008EA2300657C000F640CC /* Server+Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Logging.swift"; sourceTree = "<group>"; };
+		C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATResponse+Decodable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			children = (
 				C3008E8D30064B9000F640CC /* ATRequest+Async.swift */,
 				C3008EA0300656B000F640CC /* ATRequest+Combine.swift */,
+				C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */,
 				C3008E8F30064B9000F640CC /* Server+Async.swift */,
 				C3008EA2300657C000F640CC /* Server+Logging.swift */,
 			);
@@ -257,6 +260,7 @@
 				05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */,
 				C3008E8E30064B9000F640CC /* ATRequest+Async.swift in Sources */,
 				C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */,
+				C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */,
 				C3008E9030064B9000F640CC /* Server+Async.swift in Sources */,
 				C3008EA3300657C000F640CC /* Server+Logging.swift in Sources */,
 				C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */,

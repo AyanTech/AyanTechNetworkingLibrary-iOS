@@ -22,6 +22,14 @@ public struct ATError: Error, Sendable {
         result.type = .general
         return result
     }
+
+    public static var decodingError: ATError {
+        var result = ATError()
+        result.code = -1
+        result.type = .decodingError
+        result.persianDescription = PersianStrings.decodingError.rawValue
+        return result
+    }
     
     static func from(error: Error?) -> ATError {
         var result = ATError.generalError
@@ -53,6 +61,7 @@ public struct ATError: Error, Sendable {
     case serverError
     case general
     case cancelled
+    case decodingError
     
     var persianDescription: String {
         switch self {
@@ -64,6 +73,8 @@ public struct ATError: Error, Sendable {
             return PersianStrings.internalServerError.rawValue
         case .general:
             return PersianStrings.generalNetworkError.rawValue
+        case .decodingError:
+            return PersianStrings.decodingError.rawValue
         case .cancelled:
             return ""
         }

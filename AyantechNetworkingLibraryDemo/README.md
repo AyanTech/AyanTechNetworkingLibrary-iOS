@@ -43,6 +43,6 @@ The ViewController sends user actions to the ViewModel, which calls the use case
 }
 ```
 
-It then uses `valuePublisher()` and decodes the `Parameters` object from `ATResponse` into the requested DTO. The library handles the top-level `Status`; the feature DTO only represents the contents of `Parameters`.
+It then uses `valuePublisher(as:decoder:)` to decode the `Parameters` object into the requested DTO. The library handles the top-level `Status`; the feature DTO only represents the contents of `Parameters`.
 
 The publisher exposes `ATError` through the layers to the ViewModel. The ViewModel converts successful domain models into `ReferrerTypeUIModel` values and converts failures into an error UI state, so the ViewController does not depend on networking errors.

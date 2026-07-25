@@ -107,6 +107,23 @@ ATRequest.request(
 .store(in: &cancellables)
 ```
 
+Use `valuePublisher(as:decoder:)` to decode the `Parameters` object into a `Decodable` model:
+
+```swift
+.valuePublisher(as: MyDTO.self)
+.sink(
+    receiveCompletion: { completion in
+        if case let .failure(error) = completion {
+            print(error.persianDescription ?? "Unknown error")
+        }
+    },
+    receiveValue: { dto in
+        print(dto)
+    }
+)
+.store(in: &cancellables)
+```
+
 Use `responsePublisher()` when you always want an `ATResponse` and prefer to inspect `response.error` yourself. Its failure type is `Never`.
 
 ### Async/await
