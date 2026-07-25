@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "AyanTechNetworkingLibrary"
-  spec.version = "1.8.0"
+  spec.version = "2.0.0"
   spec.summary = "Networking library for communicate AyanTech web services"
   spec.homepage = "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS"
   spec.license = { type: 'MIT', file: 'LICENSE' }
