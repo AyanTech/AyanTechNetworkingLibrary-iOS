@@ -24,10 +24,14 @@
 		05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0CE211F19130025EC73 /* HTTPMethod.swift */; };
 		05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */; };
 		C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E90300656A000F640CC /* URLRequestBuilder.swift */; };
-		C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008E92300656A000F640CC /* URLSessionBuilder.swift */; };
-		C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA0300656B000F640CC /* ATRequest+Combine.swift */; };
-		C3008EA3300657C000F640CC /* NetworkClient+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA2300657C000F640CC /* NetworkClient+Logging.swift */; };
-		C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */; };
+		C3008EC1300660A000F640CC /* NetworkClientV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EC0300660A000F640CC /* NetworkClientV2.swift */; };
+		C3008EB1300659A000F640CC /* ATStatusV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB0300659A000F640CC /* ATStatusV2.swift */; };
+		C3008EB3300659B000F640CC /* ATErrorV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB2300659B000F640CC /* ATErrorV2.swift */; };
+		C3008EB5300659C000F640CC /* ATResponseV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB4300659C000F640CC /* ATResponseV2.swift */; };
+		C3008EB7300659D000F640CC /* ATServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB6300659D000F640CC /* ATServerResponse.swift */; };
+		C3008EB9300659E000F640CC /* PersianStringsV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB8300659E000F640CC /* PersianStringsV2.swift */; };
+		C3008EBB30065A0000F640CC /* ATRequestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EBA30065A0000F640CC /* ATRequestV2.swift */; };
+		C3008EBD30065A1000F640CC /* ATRequest+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EBC30065A1000F640CC /* ATRequest+URLRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,10 +55,14 @@
 		05D0C0CE211F19130025EC73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		05D0C0D0211F1ACB0025EC73 /* JSONObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONObject.swift; sourceTree = "<group>"; };
 		C3008E90300656A000F640CC /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
-		C3008E92300656A000F640CC /* URLSessionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionBuilder.swift; sourceTree = "<group>"; };
-		C3008EA0300656B000F640CC /* ATRequest+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+Combine.swift"; sourceTree = "<group>"; };
-		C3008EA2300657C000F640CC /* NetworkClient+Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkClient+Logging.swift"; sourceTree = "<group>"; };
-		C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATResponse+Decodable.swift"; sourceTree = "<group>"; };
+		C3008EC0300660A000F640CC /* NetworkClientV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientV2.swift; sourceTree = "<group>"; };
+		C3008EB0300659A000F640CC /* ATStatusV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATStatusV2.swift; sourceTree = "<group>"; };
+		C3008EB2300659B000F640CC /* ATErrorV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATErrorV2.swift; sourceTree = "<group>"; };
+		C3008EB4300659C000F640CC /* ATResponseV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATResponseV2.swift; sourceTree = "<group>"; };
+		C3008EB6300659D000F640CC /* ATServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATServerResponse.swift; sourceTree = "<group>"; };
+		C3008EB8300659E000F640CC /* PersianStringsV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersianStringsV2.swift; sourceTree = "<group>"; };
+		C3008EBA30065A0000F640CC /* ATRequestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATRequestV2.swift; sourceTree = "<group>"; };
+		C3008EBC30065A1000F640CC /* ATRequest+URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+URLRequest.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +133,7 @@
 				0502A2F92103193400F0332D /* PersianStrings.swift */,
 				0502A2E32103182F00F0332D /* ATError.swift */,
 				0502A2E42103182F00F0332D /* ATRequest.swift */,
+				C3008EBC30065A1000F640CC /* ATRequest+URLRequest.swift */,
 				0502A2EB2103186400F0332D /* ATLog.swift */,
 				0502A2E52103182F00F0332D /* ATResponse.swift */,
 				0502A2ED2103188700F0332D /* Utils.swift */,
@@ -146,9 +155,13 @@
 		C3008E8E3006534000F640CC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C3008EA0300656B000F640CC /* ATRequest+Combine.swift */,
-				C3008EA4300658D000F640CC /* ATResponse+Decodable.swift */,
-				C3008EA2300657C000F640CC /* NetworkClient+Logging.swift */,
+				C3008EB8300659E000F640CC /* PersianStringsV2.swift */,
+				C3008EB0300659A000F640CC /* ATStatusV2.swift */,
+				C3008EB2300659B000F640CC /* ATErrorV2.swift */,
+				C3008EBA30065A0000F640CC /* ATRequestV2.swift */,
+				C3008EB4300659C000F640CC /* ATResponseV2.swift */,
+				C3008EB6300659D000F640CC /* ATServerResponse.swift */,
+				C3008EC0300660A000F640CC /* NetworkClientV2.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				C3008E90300656A000F640CC /* URLRequestBuilder.swift */,
-				C3008E92300656A000F640CC /* URLSessionBuilder.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -242,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0502A2E82103182F00F0332D /* ATRequest.swift in Sources */,
+				C3008EBD30065A1000F640CC /* ATRequest+URLRequest.swift in Sources */,
 				0502A2E72103182F00F0332D /* ATError.swift in Sources */,
 				056527B0223CCDDA009CE9D6 /* URLSession.swift in Sources */,
 				0502A2EA2103182F00F0332D /* NetworkClient.swift in Sources */,
@@ -252,11 +265,14 @@
 				05D0C0D1211F1ACB0025EC73 /* JSONObject.swift in Sources */,
 				0502A2F7210318A500F0332D /* Int.swift in Sources */,
 				05D0C0CF211F19130025EC73 /* HTTPMethod.swift in Sources */,
-				C3008EA1300656B000F640CC /* ATRequest+Combine.swift in Sources */,
-				C3008EA5300658D000F640CC /* ATResponse+Decodable.swift in Sources */,
-				C3008EA3300657C000F640CC /* NetworkClient+Logging.swift in Sources */,
+				C3008EB1300659A000F640CC /* ATStatusV2.swift in Sources */,
+				C3008EB3300659B000F640CC /* ATErrorV2.swift in Sources */,
+				C3008EB5300659C000F640CC /* ATResponseV2.swift in Sources */,
+				C3008EB7300659D000F640CC /* ATServerResponse.swift in Sources */,
+				C3008EB9300659E000F640CC /* PersianStringsV2.swift in Sources */,
+				C3008EBB30065A0000F640CC /* ATRequestV2.swift in Sources */,
+				C3008EC1300660A000F640CC /* NetworkClientV2.swift in Sources */,
 				C3008E91300656A000F640CC /* URLRequestBuilder.swift in Sources */,
-				C3008E93300656A000F640CC /* URLSessionBuilder.swift in Sources */,
 				05AAC07221561F8A00D0A1D1 /* Notification.swift in Sources */,
 				0502A2FA2103193400F0332D /* PersianStrings.swift in Sources */,
 				0502A2F6210318A500F0332D /* Enums.swift in Sources */,

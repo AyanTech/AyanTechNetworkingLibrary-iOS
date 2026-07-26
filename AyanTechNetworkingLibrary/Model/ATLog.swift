@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ATLoggerLevel {
+public enum ATLoggerLevel: Sendable {
     case none
     case `default`
 }
