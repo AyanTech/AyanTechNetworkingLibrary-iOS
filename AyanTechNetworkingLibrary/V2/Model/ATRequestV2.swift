@@ -37,12 +37,12 @@ public struct ConfigurationV2: Sendable {
 }
 
 public extension ATRequestV2 {
-    func responsePublisher<Response: Decodable & Sendable>(as type: Response.Type = Response.self) -> AnyPublisher<ATResponseV2<Response>, ATErrorV2> {
-        NetworkClientV2.publisher(for: self, as: type)
+    func responsePublisher<Response: Decodable & Sendable>(_ type: Response.Type) -> AnyPublisher<ATResponseV2<Response>, ATErrorV2> {
+        NetworkClientV2.publisher(for: self, type)
     }
 
-    func valuePublisher<Response: Decodable & Sendable>(as type: Response.Type = Response.self) -> AnyPublisher<Response, ATErrorV2> {
-        responsePublisher(as: type)
+    func valuePublisher<Response: Decodable & Sendable>(_ type: Response.Type) -> AnyPublisher<Response, ATErrorV2> {
+        responsePublisher(type)
             .map(\.value)
             .eraseToAnyPublisher()
     }

@@ -22,6 +22,6 @@ final class AppNetwork {
             parameters: parameters,
             configuration: configuration
         )
-        .valuePublisher(as: Output.self)
+        .valuePublisher(Output.self)
     }
 }

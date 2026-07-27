@@ -37,17 +37,17 @@ public struct ATResponseV2<Value: Sendable>: Sendable {
         let body = data ?? Data()
         let httpStatusCode = httpResponse.statusCode
         let headers = normalizedHeaders(from: httpResponse)
-        let serverResponse = try? decoder.decode(ATServerResponse<Value>.self, from: body)
+        let responseEnvelope = try? decoder.decode(ATResponseEnvelope<Value>.self, from: body)
 
         guard httpStatusCode == 200 else {
-            throw ATErrorV2(errorType: .httpError, status: serverResponse?.status, httpStatusCode: httpStatusCode)
+            throw ATErrorV2(errorType: .httpError, status: responseEnvelope?.status, httpStatusCode: httpStatusCode)
         }
 
-        guard let serverResponse else {
+        guard let responseEnvelope else {
             throw ATErrorV2(errorType: .serialization, httpStatusCode: httpStatusCode)
         }
 
-        guard let status = serverResponse.status else {
+        guard let status = responseEnvelope.status else {
             throw ATErrorV2(errorType: .general, httpStatusCode: httpStatusCode)
         }
 
@@ -55,7 +55,7 @@ public struct ATResponseV2<Value: Sendable>: Sendable {
             throw ATErrorV2(errorType: .api, status: status, httpStatusCode: httpStatusCode)
         }
 
-        guard let value = serverResponse.parameters else {
+        guard let value = responseEnvelope.parameters else {
             throw ATErrorV2(errorType: .serialization, status: status, httpStatusCode: httpStatusCode)
         }
 

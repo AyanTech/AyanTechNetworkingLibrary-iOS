@@ -28,7 +28,7 @@
 		C3008EB1300659A000F640CC /* ATStatusV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB0300659A000F640CC /* ATStatusV2.swift */; };
 		C3008EB3300659B000F640CC /* ATErrorV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB2300659B000F640CC /* ATErrorV2.swift */; };
 		C3008EB5300659C000F640CC /* ATResponseV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB4300659C000F640CC /* ATResponseV2.swift */; };
-		C3008EB7300659D000F640CC /* ATServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB6300659D000F640CC /* ATServerResponse.swift */; };
+		C3008EB7300659D000F640CC /* ATResponseEnvelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB6300659D000F640CC /* ATResponseEnvelope.swift */; };
 		C3008EB9300659E000F640CC /* PersianStringsV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EB8300659E000F640CC /* PersianStringsV2.swift */; };
 		C3008EBB30065A0000F640CC /* ATRequestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EBA30065A0000F640CC /* ATRequestV2.swift */; };
 		C3008EBD30065A1000F640CC /* ATRequest+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3008EBC30065A1000F640CC /* ATRequest+URLRequest.swift */; };
@@ -59,7 +59,7 @@
 		C3008EB0300659A000F640CC /* ATStatusV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATStatusV2.swift; sourceTree = "<group>"; };
 		C3008EB2300659B000F640CC /* ATErrorV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATErrorV2.swift; sourceTree = "<group>"; };
 		C3008EB4300659C000F640CC /* ATResponseV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATResponseV2.swift; sourceTree = "<group>"; };
-		C3008EB6300659D000F640CC /* ATServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATServerResponse.swift; sourceTree = "<group>"; };
+		C3008EB6300659D000F640CC /* ATResponseEnvelope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATResponseEnvelope.swift; sourceTree = "<group>"; };
 		C3008EB8300659E000F640CC /* PersianStringsV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersianStringsV2.swift; sourceTree = "<group>"; };
 		C3008EBA30065A0000F640CC /* ATRequestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATRequestV2.swift; sourceTree = "<group>"; };
 		C3008EBC30065A1000F640CC /* ATRequest+URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATRequest+URLRequest.swift"; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				C3008EB2300659B000F640CC /* ATErrorV2.swift */,
 				C3008EBA30065A0000F640CC /* ATRequestV2.swift */,
 				C3008EB4300659C000F640CC /* ATResponseV2.swift */,
-				C3008EB6300659D000F640CC /* ATServerResponse.swift */,
+				C3008EB6300659D000F640CC /* ATResponseEnvelope.swift */,
 				C3008EC0300660A000F640CC /* NetworkClientV2.swift */,
 			);
 			path = Model;
@@ -268,7 +268,7 @@
 				C3008EB1300659A000F640CC /* ATStatusV2.swift in Sources */,
 				C3008EB3300659B000F640CC /* ATErrorV2.swift in Sources */,
 				C3008EB5300659C000F640CC /* ATResponseV2.swift in Sources */,
-				C3008EB7300659D000F640CC /* ATServerResponse.swift in Sources */,
+				C3008EB7300659D000F640CC /* ATResponseEnvelope.swift in Sources */,
 				C3008EB9300659E000F640CC /* PersianStringsV2.swift in Sources */,
 				C3008EBB30065A0000F640CC /* ATRequestV2.swift in Sources */,
 				C3008EC1300660A000F640CC /* NetworkClientV2.swift in Sources */,

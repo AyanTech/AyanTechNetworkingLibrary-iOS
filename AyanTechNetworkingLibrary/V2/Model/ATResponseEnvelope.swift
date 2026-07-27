@@ -1,6 +1,6 @@
 import Foundation
 
-struct ATServerResponse<Parameters: Decodable>: Decodable {
+struct ATResponseEnvelope<Parameters: Decodable>: Decodable {
     let status: ATStatusV2?
     let parameters: Parameters?
 

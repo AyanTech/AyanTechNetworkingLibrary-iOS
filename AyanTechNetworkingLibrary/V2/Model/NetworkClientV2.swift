@@ -30,7 +30,7 @@ public enum NetworkClientV2 {
 
     static func publisher<Parameters: Encodable & Sendable, Response: Decodable & Sendable>(
         for request: ATRequestV2<Parameters>,
-        as type: Response.Type = Response.self
+        _ type: Response.Type
     ) -> AnyPublisher<ATResponseV2<Response>, ATErrorV2> {
         guard let urlRequest = URLRequestBuilder.build(from: request) else {
             logRequest(request, body: nil)
