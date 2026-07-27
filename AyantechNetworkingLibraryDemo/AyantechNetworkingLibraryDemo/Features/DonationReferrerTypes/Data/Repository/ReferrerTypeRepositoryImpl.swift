@@ -18,7 +18,7 @@ final class ReferrerTypeRepositoryImpl: ReferrerTypeRepository {
         self.mapper = mapper
     }
 
-    func getReferrerTypes() -> AnyPublisher<[ReferrerType], ATError> {
+    func getReferrerTypes() -> AnyPublisher<[ReferrerType], ATErrorV2> {
         remoteDataSource.getReferrerTypes(
             input: DonationReferrerTypesRequestDTO()
         )

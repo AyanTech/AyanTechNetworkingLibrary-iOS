@@ -7,5 +7,5 @@ import AyanTechNetworkingLibrary
 import Combine
 
 protocol ReferrerTypeRepository {
-    func getReferrerTypes() -> AnyPublisher<[ReferrerType], ATError>
+    func getReferrerTypes() -> AnyPublisher<[ReferrerType], ATErrorV2>
 }

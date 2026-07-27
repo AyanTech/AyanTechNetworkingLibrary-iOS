@@ -25,7 +25,7 @@ final class DonationReferrerTypesViewModel {
                 receiveCompletion: { [weak self] completion in
                     guard case .failure(let error) = completion else { return }
                     self?.state = .error(
-                        error.persianDescription ?? "Unknown error"
+                        error.message
                     )
                 },
                 receiveValue: { [weak self] referrerTypes in

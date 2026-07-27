@@ -3,9 +3,9 @@
 //  AyantechNetworkingLibraryDemo
 //
 
-struct DonationReferrerTypesRequestDTO: Encodable {}
+struct DonationReferrerTypesRequestDTO: Encodable, Sendable {}
 
-struct DonationReferrerTypesDTO: Decodable {
+struct DonationReferrerTypesDTO: Decodable, Sendable {
     let referrerTypeList: [ReferrerTypeDTO]
 
     enum CodingKeys: String, CodingKey {
@@ -13,7 +13,7 @@ struct DonationReferrerTypesDTO: Decodable {
     }
 }
 
-struct ReferrerTypeDTO: Decodable {
+struct ReferrerTypeDTO: Decodable, Sendable {
     let name: String
     let showName: String
 

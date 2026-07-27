@@ -7,7 +7,7 @@ import AyanTechNetworkingLibrary
 import Combine
 
 protocol GetReferrerTypesUseCaseProtocol {
-    func execute() -> AnyPublisher<[ReferrerType], ATError>
+    func execute() -> AnyPublisher<[ReferrerType], ATErrorV2>
 }
 
 struct GetReferrerTypesUseCase: GetReferrerTypesUseCaseProtocol {
@@ -22,7 +22,7 @@ struct GetReferrerTypesUseCase: GetReferrerTypesUseCaseProtocol {
         self.sorter = sorter
     }
 
-    func execute() -> AnyPublisher<[ReferrerType], ATError> {
+    func execute() -> AnyPublisher<[ReferrerType], ATErrorV2> {
         repository.getReferrerTypes()
             .map(sorter.sortByName)
             .eraseToAnyPublisher()

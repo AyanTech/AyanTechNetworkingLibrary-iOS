@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        ATRequest.Configuration.noProxy = true
+        NetworkClientV2.setLoggerLevel(.default)
 
         let viewController = window?.rootViewController as? DonationReferrerTypesViewController
         viewController?.viewModel = dependencies.makeDonationReferrerTypesViewModel()

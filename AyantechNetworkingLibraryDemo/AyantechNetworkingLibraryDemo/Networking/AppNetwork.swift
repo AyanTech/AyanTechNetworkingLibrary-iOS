@@ -5,66 +5,23 @@
 
 import AyanTechNetworkingLibrary
 import Combine
-import Foundation
 
 final class AppNetwork {
-    private let token: String
-    private let errorMapper: ATErrorMapper
-    private let encoder: JSONEncoder
-    private let decoder: JSONDecoder
+    private let configuration: ConfigurationV2
 
-    init(
-        token: String,
-        errorMapper: ATErrorMapper = ATErrorMapper(),
-        encoder: JSONEncoder = JSONEncoder(),
-        decoder: JSONDecoder = JSONDecoder()
-    ) {
-        self.token = token
-        self.errorMapper = errorMapper
-        self.encoder = encoder
-        self.decoder = decoder
+    init(token: String) {
+        configuration = ConfigurationV2(token: token)
     }
 
-    func post<Input: Encodable, Output: Decodable>(
+    func post<Input: Encodable & Sendable, Output: Decodable & Sendable>(
         url: String,
         parameters: Input
-    ) -> AnyPublisher<Output, ATError> {
-        let body: JSONObject
-        do {
-            body = try makeRequestBody(parameters: parameters)
-        } catch {
-            return Fail<Output, ATError>(
-                error: errorMapper.toATError(error)
-            )
-            .eraseToAnyPublisher()
-        }
-
-        return ATRequest.request(url: url, method: .post)
-            .setJsonBody(
-                body: body,
-                ignoreParameterCreator: true
-            )
-            .valuePublisher(as: Output.self, decoder: decoder)
-    }
-
-    private func makeRequestBody<Input: Encodable>(parameters: Input) throws -> JSONObject {
-        let data = try encoder.encode(parameters)
-        let json = try JSONSerialization.jsonObject(with: data)
-        guard let parametersObject = json as? JSONObject else {
-            throw EncodingError.invalidValue(
-                parameters,
-                EncodingError.Context(
-                    codingPath: [],
-                    debugDescription: "Parameters must encode to a JSON object"
-                )
-            )
-        }
-
-        return [
-            "Identity": [
-                "Token": token,
-            ],
-            "Parameters": parametersObject,
-        ]
+    ) -> AnyPublisher<Output, ATErrorV2> {
+        ATRequestV2(
+            url: url,
+            parameters: parameters,
+            configuration: configuration
+        )
+        .valuePublisher(as: Output.self)
     }
 }
