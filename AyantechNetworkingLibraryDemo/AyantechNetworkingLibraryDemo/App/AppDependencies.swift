@@ -3,12 +3,21 @@
 //  AyantechNetworkingLibraryDemo
 //
 
+import UIKit
+
 @MainActor
 final class AppDependencies {
     private let appNetwork: AppNetwork
 
     init() {
         appNetwork = AppNetwork(token: "")
+    }
+
+    func makeDonationReferrerTypesViewController() -> DonationReferrerTypesViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateInitialViewController() as! DonationReferrerTypesViewController
+        viewController.configure(viewModel: makeDonationReferrerTypesViewModel())
+        return viewController
     }
 
     func makeDonationReferrerTypesViewModel() -> DonationReferrerTypesViewModel {

@@ -10,9 +10,13 @@ import UIKit
 final class DonationReferrerTypesViewController: UIViewController {
     @IBOutlet private weak var responseLabel: UILabel!
 
-    var viewModel: DonationReferrerTypesViewModel!
+    private var viewModel: DonationReferrerTypesViewModel?
 
     private var cancellables = Set<AnyCancellable>()
+
+    func configure(viewModel: DonationReferrerTypesViewModel) {
+        self.viewModel = viewModel
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +24,11 @@ final class DonationReferrerTypesViewController: UIViewController {
     }
 
     @IBAction private func loadReferrerTypesButtonPressed() {
-        viewModel.loadReferrerTypes()
+        viewModel?.loadReferrerTypes()
     }
 
     private func bindViewModel() {
-        viewModel.$state
+        viewModel?.$state
             .sink { [weak self] state in
                 self?.render(state)
             }

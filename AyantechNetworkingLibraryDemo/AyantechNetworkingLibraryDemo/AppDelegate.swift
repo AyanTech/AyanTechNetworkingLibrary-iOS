@@ -17,10 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        #if DEBUG
         NetworkClientV2.setLoggerLevel(.default)
+        #else
+        NetworkClientV2.setLoggerLevel(.none)
+        #endif
 
-        let viewController = window?.rootViewController as? DonationReferrerTypesViewController
-        viewController?.viewModel = dependencies.makeDonationReferrerTypesViewModel()
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = dependencies.makeDonationReferrerTypesViewController()
+        window.makeKeyAndVisible()
+        self.window = window
         return true
     }
 
