@@ -93,6 +93,8 @@ ATRequest.Configuration.setLoggerLevel(.default)
 
 Create a typed `ATRequestV2`. The SDK wraps `parameters` and `token` in the `Identity` / `Parameters` envelope and sends a POST request.
 
+Combine publishers are available on V2 only:
+
 - `valuePublisher(as:)` — decoded `Parameters` value
 - `responsePublisher(as:)` — full `ATResponseV2` with `status`, `headers`, and raw `body`
 
@@ -108,22 +110,18 @@ let request = ATRequestV2(
 request.valuePublisher(as: MyResponse.self).sink(...).store(in: &cancellables)
 ```
 
-### V1 (deprecated)
+Use `responsePublisher(as:)` when you want the full `ATResponseV2` and prefer to inspect `status` or `headers` yourself:
 
 ```swift
-ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .post)
-    .setJsonBody(body: ["Parameters": ["ParamA": "ValueA", "ParamB": "ValueB"]])
-    .valuePublisher(as: MyDTO.self)
-    .sink(...)
-    .store(in: &cancellables)
+request.responsePublisher(as: MyResponse.self).sink(...).store(in: &cancellables)
 ```
 
-Use `responsePublisher()` when you want an `ATResponse` and prefer to inspect `response.error` yourself. Its failure type is `Never`.
+### V1 (deprecated)
 
-### Callback (deprecated)
+V1 uses the callback-based `send` API. Migrate new code to `ATRequestV2` for typed requests and Combine support.
 
 ```swift
-// Method can be omitted; the default is POST.
+// Method can be omitted; the default is GET.
 let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .post)
 request.setJsonBody(body: [
     "Parameters": [
@@ -144,8 +142,7 @@ request.send { response in
 | API | Cancel method |
 |-----|---------------|
 | V2 `valuePublisher()` / `responsePublisher()` | Cancel the `AnyCancellable` subscription |
-| V1 `valuePublisher()` / `responsePublisher()` | Cancel the `AnyCancellable` subscription |
-| `send { }` (deprecated) | `request.cancel()` |
+| V1 `send { }` (deprecated) | `request.cancel()` |
 
 Cancelling an `AnyCancellable` cancels the underlying `URLSessionDataTask`. As with standard Combine publishers, cancellation does not emit an additional value or completion.
 
