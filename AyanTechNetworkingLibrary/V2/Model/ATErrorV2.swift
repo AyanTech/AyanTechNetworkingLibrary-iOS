@@ -7,8 +7,8 @@ public enum ATErrorTypeV2: Sendable {
     case invalidRequest
     case general
     case httpError
+    case serialization
     case api
-    case decoding
 
     static func from(error: URLError) -> ATErrorTypeV2 {
         switch error.code {
@@ -50,9 +50,11 @@ public struct ATErrorV2: Error, Sendable {
         case .invalidRequest:
             return PersianStringsV2.generalNetworkError.rawValue
         case .general:
-            return status?.message ?? PersianStringsV2.generalNetworkError.rawValue
+            return PersianStringsV2.generalNetworkError.rawValue
         case .httpError:
-            return status?.message ?? PersianStringsV2.internalServerError.rawValue
+            return PersianStringsV2.not200.rawValue
+        case .serialization:
+            return PersianStringsV2.serializationError.rawValue
         case .api:
             if let message = status?.message, !message.isEmpty {
                 return message
@@ -61,8 +63,6 @@ public struct ATErrorV2: Error, Sendable {
                 return PersianStringsV2.loginRequired.rawValue
             }
             return PersianStringsV2.generalNetworkError.rawValue
-        case .decoding:
-            return PersianStringsV2.decodingError.rawValue
         }
     }
 

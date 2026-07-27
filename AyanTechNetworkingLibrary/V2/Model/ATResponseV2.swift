@@ -44,7 +44,7 @@ public struct ATResponseV2<Value: Sendable>: Sendable {
         }
 
         guard let serverResponse else {
-            throw ATErrorV2(errorType: .decoding, httpStatusCode: httpStatusCode)
+            throw ATErrorV2(errorType: .serialization, httpStatusCode: httpStatusCode)
         }
 
         guard let status = serverResponse.status else {
@@ -56,7 +56,7 @@ public struct ATResponseV2<Value: Sendable>: Sendable {
         }
 
         guard let value = serverResponse.parameters else {
-            throw ATErrorV2(errorType: .decoding, status: status, httpStatusCode: httpStatusCode)
+            throw ATErrorV2(errorType: .serialization, status: status, httpStatusCode: httpStatusCode)
         }
 
         return ATResponseV2(
