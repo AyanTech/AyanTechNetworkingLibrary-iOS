@@ -24,8 +24,8 @@ public final class ATRequest: @unchecked Sendable {
     var body: Data?
     var task: URLSessionTask?
     var tokenValidationRequired = false
-    private var isTokenValid = false
-    private var mockFilePath: String?
+    var isTokenValid = false
+    var mockFilePath: String?
     public weak var delegate: ATRequestDelegate?
 
     public var contentType: ContentType = .applicationJson {
@@ -91,6 +91,7 @@ public final class ATRequest: @unchecked Sendable {
         self.task?.cancel()
     }
 
+    @available(*, deprecated, message: "Use ATRequestV2 instead.")
     public func send(responseHandler: BaseResponseHandler?) {
         if self.tokenValidationRequired, !self.delegate!.atRequestIsTokenValid!() {
             guard self.isTokenValid else {
@@ -107,7 +108,7 @@ public final class ATRequest: @unchecked Sendable {
                 responseHandler?(responseAndDelay.0)
             }
         } else {
-            Server.sendRequest(req: self) { responseData, headers, error in
+            NetworkClient.sendRequest(req: self) { responseData, headers, error in
                 let atResponse = ATResponse.from(responseData: responseData, responseHeaders: headers, responseError: error)
                 if atResponse.error?.type == .cancelled {
                     return
@@ -117,13 +118,14 @@ public final class ATRequest: @unchecked Sendable {
         }
     }
 
+    @available(*, deprecated, message: "Use ATRequestV2 instead. Synchronous network requests block the current thread.")
     public func sendSync() -> ATResponse {
         if let mockFile = self.mockFilePath, !mockFile.isEmpty {
             let responseAndDelay = ATResponse.from(mockFilePath: mockFile)
             Utils.sleep(seconds: responseAndDelay.1)
             return responseAndDelay.0
         } else {
-            let responseCollection = Server.sendSyncRequest(req: self)
+            let responseCollection = NetworkClient.sendSyncRequest(req: self)
             let atResponse = ATResponse.from(responseData: responseCollection.0, responseHeaders: responseCollection.1, responseError: responseCollection.2)
             return atResponse
         }
@@ -138,15 +140,15 @@ public final class ATRequest: @unchecked Sendable {
         }
 
         public static func setLogger(logger: ATNetworkLogging) {
-            Server.logger = logger
+            NetworkClient.logger = logger
         }
 
         public static func setLoggerLevel(_ level: ATLoggerLevel) {
             switch level {
             case .default:
-                Server.logger = DefaultATNetworkLogger()
+                NetworkClient.logger = DefaultATNetworkLogger()
             case .none:
-                Server.logger = SilentATNetworkLogger()
+                NetworkClient.logger = SilentATNetworkLogger()
             }
         }
     }

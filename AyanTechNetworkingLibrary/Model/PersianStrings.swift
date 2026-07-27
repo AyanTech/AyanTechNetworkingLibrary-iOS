@@ -14,4 +14,5 @@ enum PersianStrings: String {
     case noInternetConnection = "اتصال به اینترنت برقرار نیست"
     case timeoutError = "عدم دریافت پاسخ در زمان مناسب"
     case internalServerError = "خطای داخلی سرور"
+    case decodingError = "مشکل در خواندن اطلاعات"
 }

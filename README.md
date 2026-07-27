@@ -4,9 +4,16 @@ Use this SDK to communicate with AyanTech web services.
 
 ## Requirements
 
-- iOS 12.0+
+- iOS 13.0+
 - Swift 6.0+
 - Xcode 16+
+
+## Changes
+
+### response header type
+
+`ATResponse.headers` changed from `[AnyHashable: Any]` to `[String: String]` so that `ATResponse` can safely conform to `Sendable`. HTTP header names and values are now represented as strings.
+
 
 ## Installation
 
@@ -33,10 +40,17 @@ https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS.git
 Configure the library once at app launch (for example in `AppDelegate`):
 
 ```swift
-ATRequest.Configuration.noProxy = true
-ATRequest.Configuration.timeout = 30
-ATRequest.Configuration.defaultHeaders = [:]
-ATRequest.Configuration.setLoggerLevel(.default)
+NetworkClientV2.setLoggerLevel(.default)
+```
+
+Pass per-request settings through `ConfigurationV2`:
+
+```swift
+let configuration = ConfigurationV2(
+    timeout: 30,
+    defaultHeaders: [:],
+    token: "your-auth-token"
+)
 ```
 
 ### Logger
@@ -44,29 +58,70 @@ ATRequest.Configuration.setLoggerLevel(.default)
 Control network request/response logging globally:
 
 ```swift
-ATRequest.Configuration.setLoggerLevel(.default) // logs requests and responses (default)
-ATRequest.Configuration.setLoggerLevel(.none)    // disables network logging
+NetworkClientV2.setLoggerLevel(.default) // logs requests and responses (default)
+NetworkClientV2.setLoggerLevel(.none)    // disables network logging
 ```
 
 For a custom logger:
 
 ```swift
-ATRequest.Configuration.setLogger(myCustomLogger)
+NetworkClientV2.setLogger(myCustomLogger)
 ```
 
 Recommended setup:
 
 ```swift
 #if DEBUG
-ATRequest.Configuration.setLoggerLevel(.default)
+NetworkClientV2.setLoggerLevel(.default)
 #else
-ATRequest.Configuration.setLoggerLevel(.none)
+NetworkClientV2.setLoggerLevel(.none)
 #endif
 ```
 
-## Usage:
+### V1 configuration (deprecated)
+
 ```swift
-//method can be omitted (default is POST)
+ATRequest.Configuration.noProxy = true
+ATRequest.Configuration.timeout = 30
+ATRequest.Configuration.defaultHeaders = [:]
+ATRequest.Configuration.setLoggerLevel(.default)
+```
+
+## Usage
+
+### V2 (Combine)
+
+Create a typed `ATRequestV2`. The SDK wraps `parameters` and `token` in the `Identity` / `Parameters` envelope and sends a POST request.
+
+Combine publishers are available on V2 only:
+
+- `valuePublisher(as:)` — decoded `Parameters` value
+- `responsePublisher(as:)` — full `ATResponseV2` with `status`, `headers`, and raw `body`
+
+See `AyantechNetworkingLibraryDemo` for a full example.
+
+```swift
+let request = ATRequestV2(
+    url: "https://ayantech.ir/some/endpoint/url",
+    parameters: MyParameters(paramA: "ValueA", paramB: "ValueB"),
+    configuration: .init(token: "your-auth-token")
+)
+
+request.valuePublisher(as: MyResponse.self).sink(...).store(in: &cancellables)
+```
+
+Use `responsePublisher(as:)` when you want the full `ATResponseV2` and prefer to inspect `status` or `headers` yourself:
+
+```swift
+request.responsePublisher(as: MyResponse.self).sink(...).store(in: &cancellables)
+```
+
+### V1 (deprecated)
+
+V1 uses the callback-based `send` API. Migrate new code to `ATRequestV2` for typed requests and Combine support.
+
+```swift
+// Method can be omitted; the default is GET.
 let request = ATRequest.request(url: "https://ayantech.ir/some/endpoint/url", method: .post)
 request.setJsonBody(body: [
     "Parameters": [
@@ -82,7 +137,16 @@ request.send { response in
 }
 ```
 
-## Mocking response:
+### Cancellation
+
+| API | Cancel method |
+|-----|---------------|
+| V2 `valuePublisher()` / `responsePublisher()` | Cancel the `AnyCancellable` subscription |
+| V1 `send { }` (deprecated) | `request.cancel()` |
+
+Cancelling an `AnyCancellable` cancels the underlying `URLSessionDataTask`. As with standard Combine publishers, cancellation does not emit an additional value or completion.
+
+## Mocking response (V1 only):
 Good news 😍! you can mock your response using a response file.
 
 Response file is a json file containing response body and headers. Currently only success responses can be mocked. here is the mock json file format and usage:
@@ -150,7 +214,40 @@ ATRequest.request(url: "http://api.ayantech.ir/sampleApi", method: .get)
 
 ## Cheatsheet:
 
-### ATRequest:
+### ATRequestV2:
+| Property | Type | Description |
+|:--------:|:----:|-------------|
+| url | String | Request url string |
+| parameters | Encodable? | Request parameters (encoded into the `Parameters` field) |
+| headers | [String: String] | Request headers |
+| configuration | ConfigurationV2 | Timeout, default headers, and auth token |
+
+----
+
+### ATResponseV2:
+| Property | Type | Description |
+|:--------:|:----:|-------------|
+| value | Decodable | Decoded `Parameters` object |
+| body | Data | Raw response body |
+| httpStatusCode | Int | HTTP status code |
+| headers | [String: String] | Response headers |
+| status | ATStatusV2 | API status object |
+| responseString | String? | Raw response body as string |
+
+----
+
+### ATErrorV2:
+| Property | Type | Description |
+|:--------:|:----:|-------------|
+| message | String | Error human-readable string in Farsi |
+| errorType | ATErrorTypeV2 | Error type |
+| status | ATStatusV2? | API status object (if available) |
+| httpStatusCode | Int? | HTTP status code (if available) |
+| isTokenExpired | Bool | `true` when the API status code is `G00002` |
+
+----
+
+### ATRequest (deprecated):
 | Property |        Type       | Description                                                                                          |
 |:--------:|:-----------------:|------------------------------------------------------------------------------------------------------|
 | url      | String            | Request url string                                                                                   |
@@ -162,10 +259,10 @@ ATRequest.request(url: "http://api.ayantech.ir/sampleApi", method: .get)
 
 ----
 
-### ATResponse:
+### ATResponse (deprecated):
 |       Property       |      Type      | Description                                                          |
 |:--------------------:|:--------------:|----------------------------------------------------------------------|
-| headers              | \[AnyHashable: Any\]| Response headers map                                          |
+| headers              | [String: String] | Response headers map with string names and values                  |
 | responseString       | String?        | Response raw body in String                                          |
 | status               | Status?        | Response Status object (if exist)                                    |
 | error                | ATError?       | Response error (if status code is something other than 20x)          |
@@ -176,7 +273,7 @@ ATRequest.request(url: "http://api.ayantech.ir/sampleApi", method: .get)
 
 ----
 
-### ATError
+### ATError (deprecated)
 |      Property      |     Type     | Description                          |
 |:------------------:|:------------:|--------------------------------------|
 | persianDescription | String?      | Error human-readable string in Farsi |
@@ -187,7 +284,7 @@ ATRequest.request(url: "http://api.ayantech.ir/sampleApi", method: .get)
 
 ----
 
-### ATErrorType
+### ATErrorType (deprecated)
 |     Case    | Description                                                          |
 |:-----------:|----------------------------------------------------------------------|
 | noInternet  | When the user has no internet connection (neither wifi nor cellular) |

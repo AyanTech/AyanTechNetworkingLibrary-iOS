@@ -6,17 +6,27 @@
 //  Copyright © 2018 Ayantech. All rights reserved.
 //
 
-import UIKit
 import AyanTechNetworkingLibrary
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let dependencies = AppDependencies()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        ATRequest.Configuration.noProxy = true
+        #if DEBUG
+        NetworkClientV2.setLoggerLevel(.default)
+        #else
+        NetworkClientV2.setLoggerLevel(.none)
+        #endif
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = dependencies.makeDonationReferrerTypesViewController()
+        window.makeKeyAndVisible()
+        self.window = window
         return true
     }
 
@@ -44,4 +54,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
