@@ -1,14 +1,14 @@
 import Foundation
 
 public struct ATResponseV2<Value: Sendable>: Sendable {
-    public let value: Value
+    public let value: Value?
     public let body: Data
     public let httpStatusCode: Int
     public let headers: [String: String]
     public let status: ATStatusV2
 
     init(
-        value: Value,
+        value: Value?,
         body: Data,
         httpStatusCode: Int,
         headers: [String: String],
@@ -55,9 +55,7 @@ public struct ATResponseV2<Value: Sendable>: Sendable {
             throw ATErrorV2(errorType: .api, status: status, httpStatusCode: httpStatusCode)
         }
 
-        guard let value = responseEnvelope.parameters else {
-            throw ATErrorV2(errorType: .serialization, status: status, httpStatusCode: httpStatusCode)
-        }
+        let value = responseEnvelope.parameters
 
         return ATResponseV2(
             value: value,

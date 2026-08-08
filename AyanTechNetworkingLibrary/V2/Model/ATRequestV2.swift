@@ -43,6 +43,23 @@ public extension ATRequestV2 {
 
     func valuePublisher<Response: Decodable & Sendable>(_ type: Response.Type) -> AnyPublisher<Response, ATErrorV2> {
         responsePublisher(type)
+            .flatMap { response -> AnyPublisher<Response, ATErrorV2> in
+                guard let value = response.value else {
+                    return Fail(
+                        error: ATErrorV2(errorType: .serialization)
+                    )
+                    .eraseToAnyPublisher()
+                }
+
+                return Just(value)
+                    .setFailureType(to: ATErrorV2.self)
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func safeValuePublisher<Response: Decodable & Sendable>(_ type: Response.Type) -> AnyPublisher<Response?, ATErrorV2> {
+        responsePublisher(type)
             .map(\.value)
             .eraseToAnyPublisher()
     }
